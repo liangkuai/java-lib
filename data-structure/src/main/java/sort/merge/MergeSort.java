@@ -3,27 +3,34 @@ package sort.merge;
 import java.util.Arrays;
 
 /**
+ * 归并排序，升序
+ *
  * @author liangkuai
  * @date 2018/7/11
  */
 public class MergeSort {
 
+    /**
+     * 将两个有序数组进行排序
+     *
+     * @param a 有序数组
+     * @param b 有序数组
+     *
+     * @return 排序并合并后的数组
+     */
     public int[] merge(int[] a, int[] b) {
         int[] c = new int[a.length + b.length];
 
         int i = 0, j = 0, k = 0;
-        for (; i < a.length && j < b.length;) {
-            if (a[i] < b[j]) {
-                c[k++] = a[i++];
-            } else {
-                c[k++] = b[j++];
-            }
+        for (; i < a.length && j < b.length; ++k) {
+            if (a[i] < b[j])
+                c[k] = a[i++];
+            else
+                c[k] = b[j++];
         }
 
-        while (i < a.length)
-            c[k++] = a[i++];
-        while (j < b.length)
-            c[k++] = b[j++];
+        while (i < a.length) c[k++] = a[i++];
+        while (j < b.length) c[k++] = b[j++];
 
         return c;
     }

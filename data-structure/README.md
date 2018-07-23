@@ -4,6 +4,12 @@
 
 1. [二分查找](./src/main/java/search/binary/README.md)
 
+2. 二叉查找树
+
+3. 红黑树
+
+4. 散列表
+
 
 ### 排序
 

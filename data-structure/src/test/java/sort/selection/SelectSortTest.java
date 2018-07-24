@@ -7,12 +7,12 @@ import java.util.Arrays;
  * @author liangkuai
  * @date 2018/7/23
  */
-public class SelectionSortTest {
+public class SelectSortTest {
 
     public static void main(String[] args) {
         int[] origin = {'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
 
-        SelectionSort s = new SelectionSort();
+        SelectSort s = new SelectSort();
         System.out.println(Arrays.toString(s.sort(origin)));
     }
 }

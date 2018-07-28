@@ -11,16 +11,14 @@ public class InsertSort {
     public int[] sort(int[] origin) {
 
         for (int i = 1; i < origin.length; ++i) {
-            for (int j = i; j > 0; --j) {
-                if (origin[j] < origin[j - 1]) {
-                    // 交换
-                    int temp = origin[j - 1];
-                    origin[j - 1] = origin[j];
-                    origin[j] = temp;
-                } else {
-                    break;
-                }
+            int valueOfI = origin[i];
+
+            int j = i;
+            while ((j > 0) && (valueOfI < origin[j - 1])) {
+                origin[j] = origin[j - 1];
+                --j;
             }
+            origin[j] = valueOfI;
         }
 
         return origin;

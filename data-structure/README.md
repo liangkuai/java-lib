@@ -1,5 +1,9 @@
 ## 数据结构
 
+### 排序
+
+1. [归并排序](./src/main/java/sort/merge/README.md)
+
 ### 查找
 
 1. [二分查找](./src/main/java/search/binary/README.md)
@@ -9,8 +13,3 @@
 3. 红黑树
 
 4. 散列表
-
-
-### 排序
-
-1. [归并排序](./src/main/java/sort/merge/README.md)

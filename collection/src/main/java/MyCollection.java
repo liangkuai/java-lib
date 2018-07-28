@@ -28,7 +28,9 @@ public interface MyCollection<E> extends Iterator<E> {
 
     void clear();
 
+    @Override
     boolean equals(Object o);
 
+    @Override
     int hashCode();
 }

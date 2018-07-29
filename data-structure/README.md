@@ -1,8 +1,16 @@
 ## 数据结构
 
-### 排序
+### [排序](./src/main/java/sort/README.md)
 
-1. [归并排序](./src/main/java/sort/merge/README.md)
+1. 插入排序
+
+    1. [直接插入排序](./src/main/java/sort/insertion/README.md)
+
+    2. [希尔排序](./src/main/java/sort/shell/README.md)
+
+2. [选择排序](./src/main/java/sort/selection/README.md)
+
+3. [归并排序](./src/main/java/sort/merge/README.md)
 
 ### 查找
 

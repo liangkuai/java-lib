@@ -12,6 +12,8 @@
 
 3. [归并排序](./src/main/java/sort/merge/README.md)
 
+4. [快速排序](./src/main/java/sort/quick/README.md)
+
 ### 查找
 
 1. [二分查找](./src/main/java/search/binary/README.md)

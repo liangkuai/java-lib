@@ -8,11 +8,19 @@
 
     2. [希尔排序](./src/main/java/sort/shell/README.md)
 
-2. [选择排序](./src/main/java/sort/selection/README.md)
+2. 选择排序
+
+    1. [选择排序](./src/main/java/sort/selection/README.md)
+    
+    2. 堆排序
 
 3. [归并排序](./src/main/java/sort/merge/README.md)
 
-4. [快速排序](./src/main/java/sort/quick/README.md)
+4. 交换排序
+
+    1. 冒泡排序
+
+    2. [快速排序](./src/main/java/sort/quick/README.md)
 
 ### 查找
 

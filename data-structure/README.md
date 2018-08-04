@@ -18,7 +18,7 @@
 
 4. 交换排序
 
-    1. 冒泡排序
+    1. [冒泡排序](./src/main/java/sort/bubble/README.md)
 
     2. [快速排序](./src/main/java/sort/quick/README.md)
 

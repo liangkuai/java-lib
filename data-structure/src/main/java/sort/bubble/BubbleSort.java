@@ -1,6 +1,8 @@
 package sort.bubble;
 
 /**
+ * 冒泡排序，升序
+ *
  * @author liangkuai
  * @date 2018/8/4
  */

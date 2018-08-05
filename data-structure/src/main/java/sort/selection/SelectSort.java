@@ -18,11 +18,13 @@ public class SelectSort {
                     minIndex = j;
             }
 
-            // 交换
-            int temp;
-            temp = origin[i];
-            origin[i] = origin[minIndex];
-            origin[minIndex] = temp;
+            // 非原下标则交换
+            if (minIndex != i) {
+                int temp;
+                temp = origin[i];
+                origin[i] = origin[minIndex];
+                origin[minIndex] = temp;
+            }
         }
         return origin;
     }

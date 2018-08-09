@@ -10,16 +10,21 @@ public class SelectSort {
 
     public int[] sort(int[] origin) {
         for (int i = 0; i < origin.length; ++i) {
+
+            // 查找最小元素下标
             int minIndex = i;
             for (int j = i; j < origin.length; ++j) {
                 if (origin[j] < origin[minIndex])
                     minIndex = j;
             }
 
-            int temp;
-            temp = origin[i];
-            origin[i] = origin[minIndex];
-            origin[minIndex] = temp;
+            // 非原下标则交换
+            if (minIndex != i) {
+                int temp;
+                temp = origin[i];
+                origin[i] = origin[minIndex];
+                origin[minIndex] = temp;
+            }
         }
         return origin;
     }

@@ -12,7 +12,7 @@
 
     1. [选择排序](./src/main/java/sort/selection/README.md)
     
-    2. 堆排序
+    2. [堆排序](./src/main/java/sort/heap/README.md)
 
 3. [归并排序](./src/main/java/sort/merge/README.md)
 

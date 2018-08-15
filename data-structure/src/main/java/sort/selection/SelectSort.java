@@ -10,10 +10,12 @@ public class SelectSort {
 
     public int[] sort(int[] a) {
 
-        // 外循环。交换选择出来的最小元素
+        // 外循环
+        // 交换选择出来的最小元素
         for (int i = 0; i < a.length; ++i) {
 
-            // 内循环。查找最小元素下标
+            // 内循环
+            // 查找最小元素下标
             int minIndex = i;
             for (int j = i; j < a.length; ++j) {
                 if (a[j] < a[minIndex])

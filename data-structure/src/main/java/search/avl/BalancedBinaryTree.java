@@ -86,6 +86,50 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
     }
 
     private void adjust(Node parent, Node current) {
+        if (current.factor == 2) {
+            if (current.leftChild.factor == 1)
+                rightRotate(parent, current);
+            else if (current.leftChild.factor == -1) {
+                leftRotate(current, current.leftChild);
+                rightRotate(parent, current);
+            }
+        } else if (current.factor == -2) {
+            if (current.rightChild.factor == -1)
+                leftRotate(parent, current);
+            else if (current.rightChild.factor == 1) {
+                rightRotate(current, current.rightChild);
+                leftRotate(parent,current);
+            }
+        }
+    }
+
+
+    /**
+     * 单向右旋
+     */
+    private void rightRotate(Node parent, Node current) {
+        Node newChildRoot = current.leftChild;
+        current.leftChild = newChildRoot.rightChild;
+        put(parent, newChildRoot);
+        newChildRoot.rightChild = current;
+
+        updateNode(current);
+    }
+
+    /**
+     * 单向左旋
+     */
+    private void leftRotate(Node parent, Node current) {
+        Node newChildRoot = current.rightChild;
+        current.rightChild = newChildRoot.leftChild;
+        parent.rightChild = newChildRoot;
+        put(parent, newChildRoot);
+        newChildRoot.leftChild = current;
+
+        updateNode(current);
+    }
+
+    private void recalculateFactor(Node node) {
 
     }
 }

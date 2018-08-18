@@ -11,7 +11,7 @@ public class BinarySearchTreeTest {
         int[] a = {45, 52, 12, 3, 37, 100, 61, 24, 90, 78};
         int key = 12;
 
-        BinarySearchTree s = new BinarySearchTree();
+        BinarySearchTree<Integer, Integer> s = new BinarySearchTree<>();
         for (int item : a) {
             s.put(item, item);
         }

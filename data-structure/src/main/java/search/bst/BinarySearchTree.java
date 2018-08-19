@@ -161,4 +161,21 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         }
         return true;
     }
+
+
+    /**
+     * 中序遍历
+     * 非递归
+     */
+    public void inorderTraversal(Node current) {
+        if (current.leftChild != null) {
+            inorderTraversal(current.leftChild);
+        }
+
+        System.out.print(current.value);
+
+        if (current.rightChild != null) {
+            inorderTraversal(current.rightChild);
+        }
+    }
 }

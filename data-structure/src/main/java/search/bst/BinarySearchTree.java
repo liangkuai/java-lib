@@ -4,138 +4,178 @@ package search.bst;
  * @author liangkuai
  * @date 2018/8/12
  */
-public class BinarySearchTree {
+public class BinarySearchTree<K extends Comparable<K>, V> {
 
-    public class Node<K, V> {
+    public class Node {
         public K key;
         public V value;
 
-        public Node<K, V> parent;
-        public Node<K, V> leftChild;
-        public Node<K, V> rightChild;
+        public Node leftChild;
+        public Node rightChild;
+
+        public Node(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
     }
 
-    public Node<Integer, Integer> root;
+    public Node root;
 
 
     /**
+     * 查找
      * 非递归
      */
-    public Integer get(Integer key) {
-        Node<Integer, Integer> current = root;
+    public V get(K key) {
+        Node current = root;
 
         while (current != null) {
-            if (key.equals(current.key))
-                return current.value;
-            else if (key < current.key)
+            int cmp = key.compareTo(current.key);
+
+            if (cmp < 0)
                 current = current.leftChild;
-            else
+            else if (cmp > 0)
                 current = current.rightChild;
+            else
+                return current.value;
         }
         return null;
     }
 
 
-    public void put(Integer key, Integer value) {
+    /**
+     * 插入
+     */
+    public boolean put(K key, V value) {
 
+        // 空树则新节点直接作为树的根节点
         if (root == null) {
-            Node<Integer, Integer> node = new Node<>();
-            node.key = key;
-            node.value = value;
-            root = node;
-        } else {
-            Node<Integer, Integer> parent = root.parent;
-            Node<Integer, Integer> current = root;
-
-            while (current != null) {
-                if (key.equals(current.key))
-                    break;
-                else if (key < current.key) {
-                    parent = current;
-                    current = current.leftChild;
-                } else{
-                    parent = current;
-                    current = current.rightChild;
-                }
-            }
-
-            if (current != null) {
-                current.value = value;
-            } else {
-                Node<Integer, Integer> node = new Node<>();
-                node.key = key;
-                node.value = value;
-                node.parent = parent;
-
-                if (key < parent.key)
-                    parent.leftChild = node;
-                else
-                    parent.rightChild = node;
-            }
+            root = new Node(key, value);
+            return true;
         }
 
-    }
-
-
-    public void remove(Integer key) {
-        Node<Integer, Integer> parent = root.parent;
-        Node<Integer, Integer> current = root;
+        Node parent = null;
+        Node current = root;
 
         while (current != null) {
-            if (key.equals(current.key))
-                break;
-            else if (key < current.key) {
+            int cmp = key.compareTo(current.key);
+
+            if (cmp < 0) {
                 parent = current;
                 current = current.leftChild;
-            } else{
+            } else if (cmp > 0) {
                 parent = current;
                 current = current.rightChild;
+            } else {
+                break;
             }
         }
 
         if (current != null) {
-            if (current.leftChild == null && current.rightChild == null) {
-                if (key < parent.key)
-                    parent.leftChild = null;
-                else
-                    parent.rightChild = null;
+            // 相同 key，更新 value
+            current.value = value;
+        } else {
+            // 插入新节点
+            Node newNode = new Node(key, value);
+            put(parent, key, newNode);
+        }
 
-                current.parent = null;
-            } else if (current.rightChild == null) {
-                if (key < parent.key) {
-                    parent.leftChild = current.leftChild;
-                    current.leftChild.parent = parent;
-                } else {
-                    parent.rightChild = current.leftChild;
-                    current.leftChild.parent = parent;
-                }
-                current.parent = null;
-                current.leftChild = null;
-                current.rightChild = null;
-            } else if (current.leftChild == null) {
-                if (key < parent.key) {
-                    parent.leftChild = current.rightChild;
-                    current.rightChild.parent = parent;
-                } else {
-                    parent.rightChild = current.rightChild;
-                    current.rightChild.parent = parent;
-                }
+        return true;
+    }
 
+    private void put(Node parent, K key, Node child) {
+        int cmp = key.compareTo(parent.key);
+
+        if (cmp < 0) {
+            parent.leftChild = child;
+        } else if (cmp > 0) {
+            parent.rightChild = child;
+        }
+    }
+
+
+    /**
+     * 删除
+     */
+    public boolean remove(K key) {
+        if (root == null)
+            return true;
+
+        Node parent = null;
+        Node current = root;
+
+        while (current != null) {
+            int cmp = key.compareTo(current.key);
+
+            if (cmp < 0) {
+                parent = current;
+                current = current.leftChild;
+            } else if (cmp > 0) {
+                parent = current;
+                current = current.rightChild;
             } else {
-                parent.leftChild = current.leftChild;
-                current.leftChild.parent = parent;
-
-                Node<Integer, Integer> maxNodeOnLeftChildTree = current.leftChild;
-                while (maxNodeOnLeftChildTree.leftChild != null && maxNodeOnLeftChildTree.rightChild != null)
-                    maxNodeOnLeftChildTree = maxNodeOnLeftChildTree.rightChild;
-
-                maxNodeOnLeftChildTree.rightChild = current.rightChild;
-                current.rightChild.parent = maxNodeOnLeftChildTree;
-
-                current.parent = null;
-                current.leftChild = null;
-                current.rightChild = null;
+                break;
             }
+        }
+
+        if (current != null) {
+            if (current == root) {
+                // 删除根节点
+                if (current.leftChild == null && current.rightChild == null) {
+                    root = null;
+                } else if (current.rightChild == null) {
+                    root = current.leftChild;
+                } else if (current.leftChild == null) {
+                    root = current.rightChild;
+                } else {
+                    root = current.leftChild;
+                    current.leftChild = current.rightChild;
+                }
+            } else {
+                // 删除非根节点
+                if (current.leftChild == null && current.rightChild == null) {
+                    // 删除叶节点
+                    put(parent, key, null);
+                } else if (current.rightChild == null) {
+                    // 删除仅有左子树的节点
+                    put(parent, key, current.leftChild);
+                } else if (current.leftChild == null) {
+                    // 删除仅有右子树的节点
+                    put(parent, key, current.rightChild);
+                } else {
+                    // 删除两个子树都不为空的节点
+                    Node replace = current.leftChild;
+                    Node replaceParent = current;
+                    while (replace.rightChild != null) {
+                        replaceParent = replace;
+                        replace = replace.rightChild;
+                    }
+
+                    put(parent, key, replace);
+                    put(replaceParent, replace.key, replace.leftChild);
+
+                    replace.leftChild = current.leftChild;
+                    replace.rightChild = current.rightChild;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * 中序遍历
+     * 非递归
+     */
+    public void inorderTraversal(Node current) {
+        if (current.leftChild != null) {
+            inorderTraversal(current.leftChild);
+        }
+
+        System.out.print(current.value);
+
+        if (current.rightChild != null) {
+            inorderTraversal(current.rightChild);
         }
     }
 }

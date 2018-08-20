@@ -8,24 +8,29 @@ package sort.selection;
  */
 public class SelectSort {
 
-    public int[] sort(int[] origin) {
-        for (int i = 0; i < origin.length; ++i) {
+    public int[] sort(int[] a) {
 
+        // 外循环
+        // 交换选择出来的最小元素
+        for (int i = 0; i < a.length; ++i) {
+
+            // 内循环
             // 查找最小元素下标
             int minIndex = i;
-            for (int j = i; j < origin.length; ++j) {
-                if (origin[j] < origin[minIndex])
+            for (int j = i; j < a.length; ++j) {
+                if (a[j] < a[minIndex])
                     minIndex = j;
             }
 
-            // 非原下标则交换
+            // 交换
+            // 如果当前选择出来的最小元素已经在需要交换的位置上，就跳过
             if (minIndex != i) {
                 int temp;
-                temp = origin[i];
-                origin[i] = origin[minIndex];
-                origin[minIndex] = temp;
+                temp = a[i];
+                a[i] = a[minIndex];
+                a[minIndex] = temp;
             }
         }
-        return origin;
+        return a;
     }
 }

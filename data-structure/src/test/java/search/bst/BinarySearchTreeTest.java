@@ -1,6 +1,8 @@
 package search.bst;
 
 
+import java.util.HashMap;
+
 /**
  * @author liangkuai
  * @date 2018/8/12
@@ -8,17 +10,34 @@ package search.bst;
 public class BinarySearchTreeTest {
 
     public static void main(String[] args) {
-        int[] a = {45, 52, 12, 3, 37, 100, 61, 24, 90, 78};
-        int key = 12;
+        HashMap<Integer, String> a = new HashMap<>();
+        a.put(45, "e");
+        a.put(52, "f");
+        a.put(12, "b");
+        a.put(3, "a");
+        a.put(37, "d");
+        a.put(100, "j");
+        a.put(61, "g");
+        a.put(24, "c");
+        a.put(90, "i");
+        a.put(78, "h");
 
-        BinarySearchTree s = new BinarySearchTree();
-        for (int item : a) {
-            s.put(item, item);
+        int searchKey = 12;
+
+        BinarySearchTree<Integer, String> s = new BinarySearchTree<>();
+        for (int key : a.keySet()) {
+            s.put(key, a.get(key));
         }
 
-        System.out.println(s.get(key));
+        s.inorderTraversal(s.root);
+        System.out.println("");
+
+//        System.out.println(s.get(searchKey));
         s.remove(12);
-        System.out.println(s.get(key));
+//        System.out.println(s.get(searchKey));
+
+        s.inorderTraversal(s.root);
+
     }
 
 }

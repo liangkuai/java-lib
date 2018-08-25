@@ -16,11 +16,16 @@ public class RedBlackTree<K extends Comparable<K>, V> {
         Node left;
         Node right;
 
+        /**
+         * false: 黑节点
+         * true: 红节点
+         */
         boolean color;
 
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
+            this.color = true;
         }
 
         public Node(K key, V value, boolean color) {
@@ -52,30 +57,80 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
 
-    public void put(K key, V value) {
-
+    public boolean put(K key, V value) {
+        root = put(root, key, value);
     }
 
+    public Node put(Node current, K key, V value) {
 
-    public void update(Node parent, K key, Node child) {
-        int cmp = key.compareTo(parent.key);
-        if (cmp < 0) {
-            parent.left = child;
-        } else if (cmp > 0) {
-            parent.right = child;
+        if (current == null) {
+            return new Node(key, value);
+        } else {
+            int cmp = key.compareTo(current.key);
+
+            if (cmp < 0) {
+                current.left = put(current.left, key, value);
+            } else if (cmp > 0) {
+                current.right = put(current.right, key, value);
+            } else {
+                current.value = value;
+            }
+        }
+
+        if (current.color) {
+            // 红节点
+            if (current.right.color) {
+                return leftRotate(current);
+            }
+        } else {
+            // 黑节点
+            if (current.left.color && !current.right.color) {
+                if (current.left.left.color) {
+
+                    rightRotate(current);
+                }
+            }
+            if (!current.left.color && current.right.color) {
+                return leftRotate(current);
+            } else if (current.left.color && current.right.color) {
+                current.color = true;
+                return current;
+            }
         }
     }
 
 
-    public void leftRotate(Node parent, Node current) {
-        update(parent, current.key, current.right);
-        current.right = current.right.left;
-        parent.left = current;
+
+
+    /**
+     * 左旋，即将当前节点旋转为其右孩子节点的左子树
+     */
+    public Node leftRotate(Node current) {
+        Node rightChild = current.right;
+
+        current.right = rightChild.left;
+        rightChild.left = current;
+
+        // 旋转后，更换颜色
+        rightChild.color = current.color;
+        current.color = true;
+
+        return rightChild;
     }
 
-    public void rightRotate(Node parent, Node current) {
-        update(parent, current.key, current.left);
-        current.left = current.left.right;
+    /**
+     * 右旋，即将当前节点旋转为其左孩子节点的右子树
+     */
+    public Node rightRotate(Node current) {
+        Node leftChild = current.left;
 
+        current.left = leftChild.right;
+        leftChild.right = current;
+
+        // 旋转后，更换颜色
+        leftChild.color = current.color;
+        current.color = true;
+
+        return leftChild;
     }
 }

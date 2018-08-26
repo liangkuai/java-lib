@@ -57,8 +57,9 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
 
-    public boolean put(K key, V value) {
+    public void put(K key, V value) {
         root = put(root, key, value);
+        root.color = false;
     }
 
     public Node put(Node current, K key, V value) {
@@ -74,29 +75,25 @@ public class RedBlackTree<K extends Comparable<K>, V> {
                 current.right = put(current.right, key, value);
             } else {
                 current.value = value;
-            }
-        }
-
-        if (current.color) {
-            // 红节点
-            if (current.right.color) {
-                return leftRotate(current);
-            }
-        } else {
-            // 黑节点
-            if (current.left.color && !current.right.color) {
-                if (current.left.left.color) {
-
-                    rightRotate(current);
-                }
-            }
-            if (!current.left.color && current.right.color) {
-                return leftRotate(current);
-            } else if (current.left.color && current.right.color) {
-                current.color = true;
                 return current;
             }
         }
+
+        if (!current.left.color && current.right.color) {
+            current = leftRotate(current);
+        }
+
+        if (current.left.color && current.left.left.color) {
+            current = rightRotate(current);
+        }
+
+        if (current.right.color && current.left.color) {
+            current.color = true;
+            current.left.color = false;
+            current.right.color = false;
+        }
+
+        return current;
     }
 
 

@@ -59,6 +59,8 @@ public class BinaryHeap<K extends Comparable<K>> {
 
     /**
      * 上浮
+     *
+     * @param swimIndex 实际上浮元素在数组中下标 + 1
      */
     private void swim(int swimIndex) {
         K swimValue = a[swimIndex - 1];
@@ -84,6 +86,8 @@ public class BinaryHeap<K extends Comparable<K>> {
 
     /**
      * 下沉
+     *
+     * @param sinkIndex 实际下沉元素在数组中下标 + 1
      */
     private void sink(int sinkIndex) {
         K sinkValue = a[sinkIndex - 1];

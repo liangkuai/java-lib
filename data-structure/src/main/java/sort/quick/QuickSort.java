@@ -6,32 +6,32 @@ package sort.quick;
  */
 public class QuickSort {
 
-    public int[] sort(int[] origin) {
-        sort(origin, 0, origin.length - 1);
-        return origin;
+    public int[] sort(int[] a) {
+        sort(a, 0, a.length - 1);
+        return a;
     }
 
-    public void sort(int[] origin, int head, int tail) {
+    private void sort(int[] a, int head, int tail) {
 
         if (head >= tail)
             return;
 
-        int j = partition(origin, head, tail);
-        sort(origin, head, j);
-        sort(origin, j + 1, tail);
+        int pivotIndex = partition(a, head, tail);
+        sort(a, head, pivotIndex - 1);
+        sort(a, pivotIndex + 1, tail);
     }
 
-    public int partition(int[] origin, int head, int tail) {
+    private int partition(int[] a, int head, int tail) {
 
         int i = head, j = tail + 1;
-        int cp = origin[i];
+        int pivot = a[i];
 
         while (true) {
-            while (origin[++i] < cp) {
+            while (a[++i] < pivot) {
                 if (i >= tail)
                     break;
             }
-            while (origin[--j] > cp) {
+            while (a[--j] > pivot) {
                 if (j <= head)
                     break;
             }
@@ -39,13 +39,13 @@ public class QuickSort {
             if (i >= j)
                 break;
 
-            int temp = origin[i];
-            origin[i] = origin[j];
-            origin[j] = temp;
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
         }
 
-        origin[head] = origin[j];
-        origin[j] = cp;
+        a[head] = a[j];
+        a[j] = pivot;
 
         return j;
     }

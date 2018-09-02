@@ -1,7 +1,7 @@
 package search.rbt;
 
 /**
- * 红黑树
+ * 红黑树，升序
  *
  * @author liangkuai
  * @date 2018/8/21

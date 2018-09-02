@@ -2,6 +2,8 @@ package search.avl;
 
 
 /**
+ * 平衡二叉树，升序
+ *
  * @author liangkuai
  * @date 2018/8/16
  */
@@ -11,11 +13,18 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
         public K key;
         public V value;
 
+        /**
+         * 树的深度
+         */
         public int depth;
+
+        /**
+         * 平衡因子
+         */
         public int factor;
 
-        public Node leftChild;
-        public Node rightChild;
+        public Node left;
+        public Node right;
 
         public Node(K key, V value) {
             this.key = key;
@@ -25,111 +34,159 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
         }
     }
 
+
     public Node root;
 
 
-    public void put(K key, V value) {
-        Node newNode = new Node(key, value);
+    /**
+     * 查找
+     */
+    public V get(K key) {
+        Node current = root;
+        while (current != null) {
+            int cmp = key.compareTo(current.key);
 
-        if (root == null) {
-            root = newNode;
-        } else {
-            Node current = root;
-            Node parent = null;
-            put(parent, current, newNode);
-        }
-    }
-
-    private void put(Node parent, Node current, Node newNode) {
-
-        if (current == null) {
-            put(parent, newNode);
-            updateNode(parent);
-        } else {
-            if (newNode.key.compareTo(current.key) < 0) {
-                put(current, current.leftChild, newNode);
-            } else if (newNode.key.compareTo(current.key) > 0) {
-                put(current, current.rightChild, newNode);
+            if (cmp < 0) {
+                current = current.left;
+            } else if (cmp > 0) {
+                current = current.right;
             } else {
-                current.value = newNode.value;
+                return current.value;
             }
-
-            if (Math.abs(current.factor) >= 2)
-                adjust(parent, current);
         }
+        return null;
     }
 
-    private void put(Node current, Node newNode) {
-        if (newNode.key.compareTo(current.key) < 0) {
-            current.leftChild = newNode;
-        } else if (newNode.key.compareTo(current.key) > 0) {
-            current.rightChild = newNode;
-        }
+
+    /**
+     * 插入
+     */
+    public void put(K key, V value) {
+        root = put(root, key, value);
     }
 
-    private void updateNode(Node current) {
+     Node put(Node current, K key, V value) {
+        if (current == null) {
+            return new Node(key, value);
+        } else {
+            int cmp = key.compareTo(current.key);
+
+            if (cmp < 0) {
+                current.left = put(current.left, key, value);
+            } else if (cmp > 0) {
+                current.right = put(current.right, key, value);
+            } else {
+                current.value = value;
+                return current;
+            }
+        }
+
+        // 校验平衡因子
+        recalculateFactor(current);
+        if (Math.abs(current.factor) >= 2)
+            current = adjust(current);
+
+        return current;
+    }
+
+    private void recalculateFactor(Node node) {
         // depth
-        if (current.leftChild != null && current.rightChild == null) {
-            current.depth = current.leftChild.depth + 1;
-            current.factor = 1;
-        } else if (current.leftChild == null && current.rightChild != null) {
-            current.depth = current.rightChild.depth + 1;
-            current.factor = -1;
-        } else{
-            if (current.leftChild.depth >= current.rightChild.depth)
-                current.depth = current.leftChild.depth;
-            else
-                current.depth = current.rightChild.depth;
-
-            current.factor = Math.abs(current.leftChild.factor) - Math.abs(current.rightChild.factor);
+        if (node.left != null) {
+            if (node.right != null) {
+                // 有两个子树
+                if (node.left.depth >= node.right.depth) {
+                    node.depth = node.left.depth;
+                } else {
+                    node.depth = node.right.depth;
+                }
+                node.factor = Math.abs(node.left.factor) - Math.abs(node.right.factor);
+            } else {
+                // 仅有左子树
+                node.depth = node.left.depth + 1;
+                node.factor = node.left.depth;
+            }
+        } else {
+            if (node.right != null) {
+                // 仅有右子树
+                node.depth = node.right.depth + 1;
+                node.factor = 0 - node.right.depth;
+            } else {
+                node.depth = 1;
+                node.factor = 0;
+            }
         }
     }
 
-    private void adjust(Node parent, Node current) {
+
+
+    private Node adjust(Node current) {
         if (current.factor == 2) {
-            if (current.leftChild.factor == 1)
-                rightRotate(parent, current);
-            else if (current.leftChild.factor == -1) {
-                leftRotate(current, current.leftChild);
-                rightRotate(parent, current);
+            if (current.left.factor == 1) {
+                current = rightRotate(current);
+                recalculateFactor(current);
+                recalculateFactor(current.right);
+            } else if (current.left.factor == -1) {
+                current.left = leftRotate(current.left);
+                current = rightRotate(current);
+                recalculateFactor(current);
+                recalculateFactor(current.right);
+                recalculateFactor(current.left);
             }
         } else if (current.factor == -2) {
-            if (current.rightChild.factor == -1)
-                leftRotate(parent, current);
-            else if (current.rightChild.factor == 1) {
-                rightRotate(current, current.rightChild);
-                leftRotate(parent,current);
+            if (current.right.factor == -1) {
+                current = leftRotate(current);
+                recalculateFactor(current);
+                recalculateFactor(current.right);
+            } else if (current.right.factor == 1) {
+                current.right = rightRotate(current.right);
+                current = leftRotate(current);
+                recalculateFactor(current);
+                recalculateFactor(current.right);
+                recalculateFactor(current.left);
             }
         }
+        return current;
     }
 
 
     /**
      * 单向右旋
      */
-    private void rightRotate(Node parent, Node current) {
-        Node newChildRoot = current.leftChild;
-        current.leftChild = newChildRoot.rightChild;
-        put(parent, newChildRoot);
-        newChildRoot.rightChild = current;
+    private Node rightRotate(Node node) {
+        Node leftChild = node.left;
 
-        updateNode(current);
+        node.left = leftChild.right;
+        leftChild.right = node;
+
+        return leftChild;
     }
 
     /**
      * 单向左旋
      */
-    private void leftRotate(Node parent, Node current) {
-        Node newChildRoot = current.rightChild;
-        current.rightChild = newChildRoot.leftChild;
-        parent.rightChild = newChildRoot;
-        put(parent, newChildRoot);
-        newChildRoot.leftChild = current;
+    private Node leftRotate(Node node) {
+        Node rightChild = node.right;
 
-        updateNode(current);
+        node.right = rightChild.left;
+        rightChild.left = node;
+
+        return rightChild;
     }
 
-    private void recalculateFactor(Node node) {
 
+    /**
+     * 中序遍历
+     * 非递归
+     */
+    public void inorderTraversal(Node current) {
+        if (current.left != null) {
+            inorderTraversal(current.left);
+        }
+
+        System.out.print(current.value);
+
+        if (current.right != null) {
+            inorderTraversal(current.right);
+        }
     }
 }

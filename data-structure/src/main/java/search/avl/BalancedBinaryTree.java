@@ -84,11 +84,110 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
         // 校验平衡因子
         recalculateFactor(current);
         if (Math.abs(current.factor) >= 2)
-            current = adjust(current);
+            current = balanced(current);
 
         return current;
     }
 
+    /**
+     * 平衡调整
+     */
+    private Node balanced(Node current) {
+        if (current.factor == 2) {
+            if (current.left.factor == 1) {
+                current = rightRotate(current);
+            } else if (current.left.factor == -1) {
+                current.left = leftRotate(current.left);
+                current = rightRotate(current);
+            }
+        } else if (current.factor == -2) {
+            if (current.right.factor == -1) {
+                current = leftRotate(current);
+            } else if (current.right.factor == 1) {
+                current.right = rightRotate(current.right);
+                current = leftRotate(current);
+            }
+        }
+        return current;
+    }
+
+
+    /**
+     * 删除，前驱节点代替
+     */
+    public void remove(K key) {
+        root = remove(root, key);
+    }
+
+    private Node remove(Node current, K key) {
+        if (current == null) {
+            return null;
+        } else {
+            int cmp = key.compareTo(current.key);
+
+            if (cmp < 0) {
+                current.left = remove(current.left, key);
+            } else if (cmp > 0) {
+                current.right = remove(current.right, key);
+            } else {
+                // 删除命中
+
+                if (current.left == null && current.right == null) {
+                    return null;
+                } else if (current.left == null) {
+                    return current.right;
+                } else if (current.right == null) {
+                    return current.left;
+                } else {
+                    Node replaceNode = current.left;
+
+                    while (replaceNode.right != null) {
+                        replaceNode = replaceNode.right;
+                    }
+                    Node replaceNodeLeftChild = replaceNode.left;
+
+                    if (replaceNode != current.left) {
+                        replaceNode.left = current.left;
+                        replaceNode.left = adjust(replaceNode.left, replaceNodeLeftChild);
+                    }
+                    replaceNode.right = current.right;
+                    current = replaceNode;
+                }
+
+            }
+        }
+
+
+        // 校验平衡因子
+        if (current != null) {
+            recalculateFactor(current);
+            if (Math.abs(current.factor) >= 2)
+                current = balanced(current);
+        }
+
+        return current;
+    }
+
+    private Node adjust(Node current, Node left) {
+        if (current.right == null) {
+            current.right = left;
+        } else {
+            adjust(current.right, left);
+        }
+
+        // 校验平衡因子
+        recalculateFactor(current);
+        if (Math.abs(current.factor) >= 2)
+            current = balanced(current);
+
+        return current;
+    }
+
+
+    /**
+     * 重新计算节点的平衡因子，
+     * 和以该节点为根的子树的深度
+     */
     private void recalculateFactor(Node node) {
         // depth
         if (node.left != null) {
@@ -118,39 +217,8 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
     }
 
 
-
-    private Node adjust(Node current) {
-        if (current.factor == 2) {
-            if (current.left.factor == 1) {
-                current = rightRotate(current);
-                recalculateFactor(current);
-                recalculateFactor(current.right);
-            } else if (current.left.factor == -1) {
-                current.left = leftRotate(current.left);
-                current = rightRotate(current);
-                recalculateFactor(current);
-                recalculateFactor(current.right);
-                recalculateFactor(current.left);
-            }
-        } else if (current.factor == -2) {
-            if (current.right.factor == -1) {
-                current = leftRotate(current);
-                recalculateFactor(current);
-                recalculateFactor(current.right);
-            } else if (current.right.factor == 1) {
-                current.right = rightRotate(current.right);
-                current = leftRotate(current);
-                recalculateFactor(current);
-                recalculateFactor(current.right);
-                recalculateFactor(current.left);
-            }
-        }
-        return current;
-    }
-
-
     /**
-     * 单向右旋
+     * 右旋，即将当前节点旋转为其左孩子节点的右子树
      */
     private Node rightRotate(Node node) {
         Node leftChild = node.left;
@@ -158,17 +226,25 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
         node.left = leftChild.right;
         leftChild.right = node;
 
+        // 更新平衡因子
+        recalculateFactor(node);
+        recalculateFactor(leftChild);
+
         return leftChild;
     }
 
     /**
-     * 单向左旋
+     * 左旋，即将当前节点旋转为其右孩子节点的左子树
      */
     private Node leftRotate(Node node) {
         Node rightChild = node.right;
 
         node.right = rightChild.left;
         rightChild.left = node;
+
+        // 更新平衡因子
+        recalculateFactor(node);
+        recalculateFactor(rightChild);
 
         return rightChild;
     }

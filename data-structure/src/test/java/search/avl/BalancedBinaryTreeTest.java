@@ -32,11 +32,11 @@ public class BalancedBinaryTreeTest {
         s.inorderTraversal(s.root);
         System.out.println("");
 
-//        System.out.println(s.get(searchKey));
-//        s.remove(12);
-//        System.out.println(s.get(searchKey));
+        System.out.println(s.get(searchKey));
+        s.remove(24);
+        System.out.println(s.get(searchKey));
 
-//        s.inorderTraversal(s.root);
+        s.inorderTraversal(s.root);
     }
 
 }

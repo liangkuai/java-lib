@@ -14,12 +14,12 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
         public V value;
 
         /**
-         * 树的深度
+         * 以该节点为根的树的深度
          */
         public int depth;
 
         /**
-         * 平衡因子
+         * 节点平衡因子
          */
         public int factor;
 
@@ -89,28 +89,6 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
         return current;
     }
 
-    /**
-     * 平衡调整
-     */
-    private Node balanced(Node current) {
-        if (current.factor == 2) {
-            if (current.left.factor == 1) {
-                current = rightRotate(current);
-            } else if (current.left.factor == -1) {
-                current.left = leftRotate(current.left);
-                current = rightRotate(current);
-            }
-        } else if (current.factor == -2) {
-            if (current.right.factor == -1) {
-                current = leftRotate(current);
-            } else if (current.right.factor == 1) {
-                current.right = rightRotate(current.right);
-                current = leftRotate(current);
-            }
-        }
-        return current;
-    }
-
 
     /**
      * 删除，前驱节点代替
@@ -139,19 +117,19 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
                 } else if (current.right == null) {
                     return current.left;
                 } else {
-                    Node replaceNode = current.left;
+                    Node replace = current.left;
 
-                    while (replaceNode.right != null) {
-                        replaceNode = replaceNode.right;
+                    while (replace.right != null) {
+                        replace = replace.right;
                     }
-                    Node replaceNodeLeftChild = replaceNode.left;
+                    Node replaceLeftChild = replace.left;
 
-                    if (replaceNode != current.left) {
-                        replaceNode.left = current.left;
-                        replaceNode.left = adjust(replaceNode.left, replaceNodeLeftChild);
+                    if (replace != current.left) {
+                        replace.left = current.left;
+                        replace.left = adjust(replace.left, replaceLeftChild);
                     }
-                    replaceNode.right = current.right;
-                    current = replaceNode;
+                    replace.right = current.right;
+                    current = replace;
                 }
 
             }
@@ -159,17 +137,15 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
 
 
         // 校验平衡因子
-        if (current != null) {
-            recalculateFactor(current);
-            if (Math.abs(current.factor) >= 2)
-                current = balanced(current);
-        }
+        recalculateFactor(current);
+        if (Math.abs(current.factor) >= 2)
+            current = balanced(current);
 
         return current;
     }
 
     private Node adjust(Node current, Node left) {
-        if (current.right == null) {
+        if (current.right.right == null) {
             current.right = left;
         } else {
             adjust(current.right, left);
@@ -189,31 +165,50 @@ public class BalancedBinaryTree<K extends Comparable<K>, V> {
      * 和以该节点为根的子树的深度
      */
     private void recalculateFactor(Node node) {
-        // depth
-        if (node.left != null) {
-            if (node.right != null) {
-                // 有两个子树
-                if (node.left.depth >= node.right.depth) {
-                    node.depth = node.left.depth;
-                } else {
-                    node.depth = node.right.depth;
-                }
-                node.factor = Math.abs(node.left.factor) - Math.abs(node.right.factor);
-            } else {
-                // 仅有左子树
-                node.depth = node.left.depth + 1;
-                node.factor = node.left.depth;
-            }
+        if (node.left == null && node.right == null) {
+            // 无孩子
+            node.depth = 1;
+            node.factor = 0;
+        } else if (node.left == null) {
+            // 仅有右子树
+            node.depth = node.right.depth + 1;
+            node.factor = - node.right.depth;
+        } else if (node.right == null) {
+            // 仅有左子树
+            node.depth = node.left.depth + 1;
+            node.factor = node.left.depth;
         } else {
-            if (node.right != null) {
-                // 仅有右子树
-                node.depth = node.right.depth + 1;
-                node.factor = 0 - node.right.depth;
+            // 有两个子树
+            if (node.left.depth >= node.right.depth) {
+                node.depth = node.left.depth;
             } else {
-                node.depth = 1;
-                node.factor = 0;
+                node.depth = node.right.depth;
+            }
+            node.factor = Math.abs(node.left.factor) - Math.abs(node.right.factor);
+        }
+    }
+
+
+    /**
+     * 平衡调整
+     */
+    private Node balanced(Node current) {
+        if (current.factor == 2) {
+            if (current.left.factor == 1) {
+                current = rightRotate(current);
+            } else if (current.left.factor == -1) {
+                current.left = leftRotate(current.left);
+                current = rightRotate(current);
+            }
+        } else if (current.factor == -2) {
+            if (current.right.factor == -1) {
+                current = leftRotate(current);
+            } else if (current.right.factor == 1) {
+                current.right = rightRotate(current.right);
+                current = leftRotate(current);
             }
         }
+        return current;
     }
 
 

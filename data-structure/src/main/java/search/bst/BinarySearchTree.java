@@ -1,6 +1,8 @@
 package search.bst;
 
 /**
+ * 二叉排序树，升序
+ *
  * @author liangkuai
  * @date 2018/8/12
  */

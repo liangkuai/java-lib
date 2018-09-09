@@ -25,6 +25,8 @@ public class RedBlackTree<K extends Comparable<K>, V> {
             this.key = key;
             this.value = value;
             this.color = Color.RED;
+
+            // FIXME: 叶节点和 NULL 节点
             this.left = new Node(Color.BLACK);
             this.right = new Node(Color.BLACK);
         }
@@ -78,6 +80,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     private Node put(Node current, K key, V value) {
 
+        // FIXME: 叶节点和 NULL 节点
         if (current == null || current.key == null) {
             return new Node(key, value);
         } else {
@@ -169,12 +172,14 @@ public class RedBlackTree<K extends Comparable<K>, V> {
      * 非递归
      */
     public void inorderTraversal(RedBlackTree.Node current) {
+        // FIXME: 叶节点和 NULL 节点
         if (current.left != null && current.left.key != null) {
             inorderTraversal(current.left);
         }
 
         System.out.print(current.value);
 
+        // FIXME: 叶节点和 NULL 节点
         if (current.right != null && current.right.key != null) {
             inorderTraversal(current.right);
         }

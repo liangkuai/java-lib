@@ -73,6 +73,9 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
 
+    /**
+     * 插入
+     */
     public void put(K key, V value) {
         root = put(root, key, value);
         root.color = Color.BLACK;
@@ -131,6 +134,79 @@ public class RedBlackTree<K extends Comparable<K>, V> {
         return current;
     }
 
+
+    /**
+     * 删除
+     */
+    public void remove(K key) {
+        root = remove(root, key);
+    }
+
+    private Node remove(Node current, K key) {
+        if (current == null) {
+            return null;
+        } else {
+            int cmp = key.compareTo(current.key);
+
+            if (cmp < 0) {
+                current.left = remove(current.left, key);
+            } else if (cmp > 0) {
+                current.right = remove(current.right, key);
+            } else {
+                // 命中
+
+                current = remove(current);
+            }
+        }
+
+        return current;
+    }
+
+
+    private Node remove(Node current) {
+        if (current.left == null && current.right == null) {
+            // 被删除节点无子节点
+            if (current.color == Color.RED) {
+                current = null;
+            } else {
+
+
+
+            }
+        } else if (current.right == null) {
+            // 被删除节点仅有左子节点
+            if (current.color == Color.RED) {
+                // error
+                System.out.println("error");
+            } else {
+                current = current.left;
+                current.color = Color.BLACK;
+            }
+        } else if (current.left == null) {
+            // 被删除节点仅有右子节点
+            if (current.color == Color.RED) {
+                // error
+                System.out.println("error");
+            } else {
+                current = current.right;
+                current.color = Color.BLACK;
+            }
+        } else {
+            // 被删除节点有两个子节点
+            Node succeedParent = current;
+            Node succeed = current.right;
+            while (succeed.left != null) {
+                succeedParent = succeed;
+                succeed = succeed.left;
+            }
+            current.key = succeed.key;
+            current.value = succeed.value;
+
+            succeedParent = remove(succeed);
+        }
+
+        return current;
+    }
 
 
 

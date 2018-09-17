@@ -11,29 +11,46 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     public Node root;
 
     private class Node {
-        K key;
-        V value;
-        Node left;
-        Node right;
+        private K key;
+        private V value;
+        private Node left;
+        private Node right;
 
         /**
-         * false: 黑节点
-         * true: 红节点
+         * 节点颜色
          */
-        boolean color;
+        private Color color;
 
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
-            this.color = true;
+            this.color = Color.RED;
+
+            // FIXME: 叶节点和 NULL 节点
+            this.left = new Node(Color.BLACK);
+            this.right = new Node(Color.BLACK);
         }
 
-        public Node(K key, V value, boolean color) {
+        public Node(Color color) {
+            this.color = color;
+        }
+
+        public Node(K key, V value, Color color) {
             this.key = key;
             this.value = value;
             this.color = color;
         }
     }
+
+
+    /**
+     * 节点颜色
+     */
+    public enum Color {
+        BLACK,
+        RED
+    }
+
 
     /**
      * 查找
@@ -41,7 +58,6 @@ public class RedBlackTree<K extends Comparable<K>, V> {
      */
     public V get(K key) {
         Node current = root;
-
         while (current != null) {
             int cmp = key.compareTo(current.key);
 
@@ -57,14 +73,19 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
 
+    /**
+     * 插入
+     * 递归
+     */
     public void put(K key, V value) {
         root = put(root, key, value);
-        root.color = false;
+        root.color = Color.BLACK;
     }
 
-    public Node put(Node current, K key, V value) {
+    private Node put(Node current, K key, V value) {
 
-        if (current == null) {
+        // FIXME: 叶节点和 NULL 节点
+        if (current == null || current.key == null) {
             return new Node(key, value);
         } else {
             int cmp = key.compareTo(current.key);
@@ -79,23 +100,151 @@ public class RedBlackTree<K extends Comparable<K>, V> {
             }
         }
 
-        if (!current.left.color && current.right.color) {
-            current = leftRotate(current);
-        }
 
-        if (current.left.color && current.left.left.color) {
-            current = rightRotate(current);
-        }
+        if (current.left.color == Color.RED && current.right.color == Color.RED) {
+            // 叔父节点为红色
 
-        if (current.right.color && current.left.color) {
-            current.color = true;
-            current.left.color = false;
-            current.right.color = false;
+            if (current.left.left.color == Color.RED || current.left.right.color == Color.RED
+                    || current.right.left.color == Color.RED || current.right.right.color == Color.RED) {
+                current.color = Color.RED;
+                current.left.color = Color.BLACK;
+                current.right.color = Color.BLACK;
+            }
+        } else if (current.left.color == Color.RED) {
+            // 叔父节点为黑色
+
+            if (current.left.left.color == Color.RED) {
+                current = rightRotate(current);
+            } else
+
+            if (current.left.right.color == Color.RED) {
+                current.left = leftRotate(current.left);
+                current = rightRotate(current);
+            }
+        } else if (current.right.color == Color.RED) {
+            if (current.right.left.color == Color.RED) {
+                current.right = rightRotate(current.right);
+                current = leftRotate(current);
+            } else
+
+            if (current.right.right.color == Color.RED) {
+                current = leftRotate(current);
+            }
         }
 
         return current;
     }
 
+
+    /**
+     * 删除
+     * 递归
+     */
+    public void remove(K key) {
+        root = remove(root, null, key);
+    }
+
+    private Node remove(Node current, Node parent, K key) {
+        if (current == null) {
+            return null;
+        } else {
+            int cmp = key.compareTo(current.key);
+
+            if (cmp < 0) {
+                current.left = remove(current.left, current, key);
+            } else if (cmp > 0) {
+                current.right = remove(current.right, current, key);
+            } else {
+                // 命中
+
+                current = remove(current, parent);
+            }
+        }
+
+        return current;
+    }
+
+
+    private Node remove(Node current, Node parent) {
+        if (current.left.key == null && current.right.key == null) {
+            // 被删除节点无子节点
+            if (current.color == Color.RED) {
+                current = current.left;
+            } else {
+                // 被删除节点为黑色，且无子节点
+
+                if (current.key.compareTo(parent.key) < 0) {
+
+                    if (parent.right.color == Color.BLACK) {
+                        // 兄弟节点为黑色
+                        current = current.left;
+
+                        if (parent.right.right.color == Color.RED || parent.right.left.color == Color.RED) {
+                            // 有红色侄子节点
+                            if (parent.right.right.color == Color.RED) {
+                                parent = leftRotate(parent);
+                            } else {
+                                parent.right = rightRotate(parent.right);
+                                parent = leftRotate(parent);
+                            }
+                            parent.left.color = Color.BLACK;
+                            parent.right.color = Color.BLACK;
+                        } else {
+                            // 无红色侄子节点
+                            if (parent.color == Color.RED) {
+                                parent.color = Color.BLACK;
+                                parent.right.color = Color.RED;
+                            } else {
+                                parent.right.color = Color.RED;
+
+                            }
+                        }
+
+                    } else {
+                        // 兄弟节点为红色
+                    }
+
+                } else if (current.key.compareTo(parent.key) > 0) {
+                    if (parent.left.color == Color.BLACK) {
+
+                    }
+
+                }
+            }
+        } else if (current.right == null) {
+            // 被删除节点仅有左子节点
+            if (current.color == Color.RED) {
+                // error
+                System.out.println("error");
+            } else {
+                current = current.left;
+                current.color = Color.BLACK;
+            }
+        } else if (current.left == null) {
+            // 被删除节点仅有右子节点
+            if (current.color == Color.RED) {
+                // error
+                System.out.println("error");
+            } else {
+                current = current.right;
+                current.color = Color.BLACK;
+            }
+        } else {
+            // 被删除节点有两个子节点
+            Node succeedParent = current;
+            Node succeed = current.right;
+            while (succeed.left != null) {
+                succeedParent = succeed;
+                succeed = succeed.left;
+            }
+            current.key = succeed.key;
+            current.value = succeed.value;
+
+            succeedParent = remove(succeed, parent);
+        }
+
+        return current;
+    }
 
 
 
@@ -110,7 +259,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
         // 旋转后，更换颜色
         rightChild.color = current.color;
-        current.color = true;
+        current.color = Color.RED;
 
         return rightChild;
     }
@@ -126,8 +275,27 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
         // 旋转后，更换颜色
         leftChild.color = current.color;
-        current.color = true;
+        current.color = Color.RED;
 
         return leftChild;
+    }
+
+
+    /**
+     * 中序遍历
+     * 非递归
+     */
+    public void inorderTraversal(RedBlackTree.Node current) {
+        // FIXME: 叶节点和 NULL 节点
+        if (current.left != null && current.left.key != null) {
+            inorderTraversal(current.left);
+        }
+
+        System.out.print(current.value);
+
+        // FIXME: 叶节点和 NULL 节点
+        if (current.right != null && current.right.key != null) {
+            inorderTraversal(current.right);
+        }
     }
 }

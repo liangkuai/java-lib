@@ -75,6 +75,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     /**
      * 插入
+     * 递归
      */
     public void put(K key, V value) {
         root = put(root, key, value);
@@ -137,25 +138,26 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
     /**
      * 删除
+     * 递归
      */
     public void remove(K key) {
-        root = remove(root, key);
+        root = remove(root, null, key);
     }
 
-    private Node remove(Node current, K key) {
+    private Node remove(Node current, Node parent, K key) {
         if (current == null) {
             return null;
         } else {
             int cmp = key.compareTo(current.key);
 
             if (cmp < 0) {
-                current.left = remove(current.left, key);
+                current.left = remove(current.left, current, key);
             } else if (cmp > 0) {
-                current.right = remove(current.right, key);
+                current.right = remove(current.right, current, key);
             } else {
                 // 命中
 
-                current = remove(current);
+                current = remove(current, parent);
             }
         }
 
@@ -163,15 +165,51 @@ public class RedBlackTree<K extends Comparable<K>, V> {
     }
 
 
-    private Node remove(Node current) {
-        if (current.left == null && current.right == null) {
+    private Node remove(Node current, Node parent) {
+        if (current.left.key == null && current.right.key == null) {
             // 被删除节点无子节点
             if (current.color == Color.RED) {
-                current = null;
+                current = current.left;
             } else {
+                // 被删除节点为黑色，且无子节点
 
+                if (current.key.compareTo(parent.key) < 0) {
 
+                    if (parent.right.color == Color.BLACK) {
+                        // 兄弟节点为黑色
+                        current = current.left;
 
+                        if (parent.right.right.color == Color.RED || parent.right.left.color == Color.RED) {
+                            // 有红色侄子节点
+                            if (parent.right.right.color == Color.RED) {
+                                parent = leftRotate(parent);
+                            } else {
+                                parent.right = rightRotate(parent.right);
+                                parent = leftRotate(parent);
+                            }
+                            parent.left.color = Color.BLACK;
+                            parent.right.color = Color.BLACK;
+                        } else {
+                            // 无红色侄子节点
+                            if (parent.color == Color.RED) {
+                                parent.color = Color.BLACK;
+                                parent.right.color = Color.RED;
+                            } else {
+                                parent.right.color = Color.RED;
+
+                            }
+                        }
+
+                    } else {
+                        // 兄弟节点为红色
+                    }
+
+                } else if (current.key.compareTo(parent.key) > 0) {
+                    if (parent.left.color == Color.BLACK) {
+
+                    }
+
+                }
             }
         } else if (current.right == null) {
             // 被删除节点仅有左子节点
@@ -202,7 +240,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
             current.key = succeed.key;
             current.value = succeed.value;
 
-            succeedParent = remove(succeed);
+            succeedParent = remove(succeed, parent);
         }
 
         return current;

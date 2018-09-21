@@ -24,18 +24,18 @@ public class MSDSort {
         }
 
         // 小型子数组进行插入排序
-        /*if (end - start <= critical) {
+        if (end - start <= critical) {
             for (int i = start + 1; i <= end - start; i++) {
                 int j = i;
                 String t = a[j];
-                while ( (j > start) && (a[j].compareTo(a[j - 1]) < 0) ) {
+                while ( (j > start) && (t.compareTo(a[j - 1]) < 0) ) {
                     a[j] = a[j - 1];
                     j--;
                 }
                 a[j] = t;
             }
             return;
-        }*/
+        }
 
         int[] bucket = new int[256];
         boolean flag = true;

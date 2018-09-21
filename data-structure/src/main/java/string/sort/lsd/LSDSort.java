@@ -1,7 +1,7 @@
 package string.sort.lsd;
 
 /**
- * 低位优先字符串排序，升序
+ * 低位优先的字符串排序，升序
  * LSD（Least significant digital）
  *
  * @author liukai

@@ -8,13 +8,14 @@ public class Client {
 
     public static void main(String[] args) {
 
-        Duck duck = new MallardDuck();
-        duck.quack();
-        duck.fly();
+        Target target = new ConcreteTarget();
+        System.out.println("无适配器：");
+        target.chargeOf240V();
+        System.out.println();
 
-        WildTurkey turkey = new WildTurkey();
-        Duck turkeyAdapter = new TurkeyAdapter(turkey);
-        turkeyAdapter.quack();
-        turkeyAdapter.fly();
+        Adaptee adaptee = new ConcreteAdaptee();
+        Target adapter = new Adapter(adaptee);
+        System.out.println("120V 充电器使用适配器：");
+        adapter.chargeOf240V();
     }
 }

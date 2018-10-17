@@ -19,8 +19,11 @@ public class MyBufferedInputStream extends MyFilterInputStream {
 
     /**
      * 内部缓冲区
+     *
+     * 使用 volatile 保证 buf 可见性，
+     * 每个线程都能及时得知 buf 的打开和关闭状态
      */
-    private byte[] buf;
+    private volatile byte[] buf;
 
     protected int count;
 
@@ -62,6 +65,17 @@ public class MyBufferedInputStream extends MyFilterInputStream {
     }
 
 
+    @Override
+    public synchronized int read() throws IOException {
+        if (pos >= count) {
+            fill();
+            // 试图填满 buffer，但是数据已经读取完，pos = count = 0
+            if (pos >= count) {
+                return -1;
+            }
+        }
+        return getBufIfOpen()[pos++] & 0xff;
+    }
 
     /**
      * 填充缓冲区

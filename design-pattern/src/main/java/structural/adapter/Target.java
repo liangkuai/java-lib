@@ -1,4 +1,4 @@
-package adapter;
+package structural.adapter;
 
 /**
  * 目标接口

@@ -2,8 +2,6 @@ package atomic;
 
 import sun.misc.Unsafe;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * @author liukai
  * @date 18-10-26
@@ -16,16 +14,17 @@ public class MyAtomicInteger {
     private static final Unsafe unsafe = Unsafe.getUnsafe();
 
     /**
-     * 成员变量 value 在内存中的偏移地址
+     * value 字段对象在内存中相对于当前（MyAtomicInteger）类对象的地址偏移量
      */
     private static final long valueOffset;
 
     static {
         try {
-            // 使用 Unsafe 提供的 objectFieldOffset() 方法
-            // 获取成员变量 value 在内存中的偏移地址
-            valueOffset = unsafe.objectFieldOffset
-                    (AtomicInteger.class.getDeclaredField("value"));
+            // 通过反射机制获取 MyAtomicInteger 类的 value 字段对象
+            //
+            // 再通过 Unsafe 对象的 objectFieldOffset() 方法获取
+            // 到 value 字段对象在内存中相对于 MyAtomicInteger.class 这个类对象的地址偏移量
+            valueOffset = unsafe.objectFieldOffset(MyAtomicInteger.class.getDeclaredField("value"));
         } catch (Exception ex) {
             throw new Error(ex);
         }

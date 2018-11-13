@@ -195,7 +195,7 @@ public abstract class MyAbstractQueuedSynchronizer {
 
 
     /**
-     * node 在 CLH 队列中一直尝试获取独占资源。
+     * 在 CLH 队列中一直尝试获取独占资源。
      *
      * 如果当前线程获得独占资源，则返回；
      * 否则，当前线程进行 waiting
@@ -204,28 +204,38 @@ public abstract class MyAbstractQueuedSynchronizer {
         // 标记是否成功拿到独占资源
         boolean failed = true;
 
-        boolean interrupted = false;
+        try {
+            boolean interrupted = false;
 
-        // 自旋
-        for (; ; ) {
-            final Node p = node.predecessor();
+            // 自旋
+            for (; ; ) {
+                final Node p = node.predecessor();
 
-            // 如果前驱是 head，那么当前节点就是二号节点，可以尝试获取独占资源
-            if (p == head && tryAcquire(arg)) {
-                // 当前节点尝试获取独占资源成功，
-                // 让当前节点成为 head
-                setHead(node);
+                // 如果前驱是 head，那么当前节点就是二号节点，可以尝试获取独占资源
+                if (p == head && tryAcquire(arg)) {
+                    // 当前节点尝试获取独占资源成功，
+                    // 让当前节点成为 head
+                    setHead(node);
 
-                // 前驱 next 设置为 null，方便 GC
-                p.next = null;
+                    // 前驱 next 设置为 null，方便 GC
+                    p.next = null;
 
-                failed = false;
-                return interrupted;
+                    failed = false;
+                    return interrupted;
+                }
+
+                // 首先调用 shouldParkAfterFailedAcquire() 判断当前线程是否可以被挂起进入 Waiting 状态
+                //
+                // 如果当前线程可以进入 Waiting 状态，
+                // 调用 parkAndCheckInterrupt() 方法阻塞当前线程，并返回当前线程的中断状态。
+                if (shouldParkAfterFailedAcquire(p, node) &&
+                        parkAndCheckInterrupt())
+                    // 如果从 parkAndCheckInterrupt() 方法中返回 true，表示当前线程被中断了；
+                    // 将中断标志 interrupted 设为 true。
+                    interrupted = true;
             }
+        } finally {
 
-            if (shouldParkAfterFailedAcquire(p, node) &&
-                    parkAndCheckInterrupt())
-                interrupted = true;
         }
 
     }
@@ -241,6 +251,9 @@ public abstract class MyAbstractQueuedSynchronizer {
 
     /**
      * 判断当前线程是否应该阻塞
+     *
+     * @param pred 前驱
+     * @param node 当前线程所在 node
      */
     private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
         // 获取前驱的状态
@@ -266,7 +279,10 @@ public abstract class MyAbstractQueuedSynchronizer {
     }
 
     /**
-     * 让线程进入 waiting 状态
+     * 阻塞当前线程，让当前线程进入 Waiting 状态
+     *
+     * 调用 LockSupport 类的 park() 方法阻塞当前线程，让当前线程进入 Waiting 状态；
+     * 返回当前线程的中断状态。
      */
     private final boolean parkAndCheckInterrupt() {
         MyLockSupport.park(this);

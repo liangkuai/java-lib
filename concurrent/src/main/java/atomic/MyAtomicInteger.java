@@ -14,7 +14,7 @@ public class MyAtomicInteger {
     private static final Unsafe unsafe = Unsafe.getUnsafe();
 
     /**
-     * value 字段对象在内存中相对于当前（MyAtomicInteger）类对象的地址偏移量
+     * value 字段对象在内存中相对于当前（MyAtomicInteger）类对象的起始地址的偏移量
      */
     private static final long valueOffset;
 
@@ -23,7 +23,7 @@ public class MyAtomicInteger {
             // 通过反射机制获取 MyAtomicInteger 类的 value 字段对象
             //
             // 再通过 Unsafe 对象的 objectFieldOffset() 方法获取
-            // 到 value 字段对象在内存中相对于 MyAtomicInteger.class 这个类对象的地址偏移量
+            // 到 value 字段对象在内存中相对于 MyAtomicInteger.class 这个类对象的起始地址的偏移量
             valueOffset = unsafe.objectFieldOffset(MyAtomicInteger.class.getDeclaredField("value"));
         } catch (Exception ex) {
             throw new Error(ex);

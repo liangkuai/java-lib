@@ -75,7 +75,7 @@ public class MyLockSupport {
 
 
     /**
-     * parkBlockerOffset 是 parkBlocker 字段对象在内存中相对于 Thread.class 这个类对象的地址偏移量
+     * parkBlockerOffset 是 parkBlocker 字段对象在内存中相对于 Thread.class 这个类对象的起始地址的偏移量
      *
      * parkBlocker 是 Thread 对象中的成员变量，用于记录线程被谁阻塞的。
      */
@@ -87,7 +87,7 @@ public class MyLockSupport {
             // 通过反射机制获取 Thread 类的 parkBlocker 字段对象
             //
             // 再通过 Unsafe 对象的 objectFieldOffset() 方法
-            // 获取到 parkBlocker 字段对象在内存中相对于 Thread.class 这个类对象的地址偏移量
+            // 获取到 parkBlocker 字段对象在内存中相对于 Thread.class 这个类对象的起始地址的偏移量
             parkBlockerOffset = UNSAFE.objectFieldOffset(Thread.class.getDeclaredField("parkBlocker"));
         } catch (Exception ex) {
             throw new Error(ex);

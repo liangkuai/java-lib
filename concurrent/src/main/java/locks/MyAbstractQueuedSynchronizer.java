@@ -12,7 +12,7 @@ import sun.misc.Unsafe;
 public abstract class MyAbstractQueuedSynchronizer {
 
     /**
-     * 同步状态
+     * 资源数量
      */
     private volatile int state;
 
@@ -77,6 +77,9 @@ public abstract class MyAbstractQueuedSynchronizer {
         // 若 nextWaiter = EXCLUSIVE，(即 nextWaiter = null)，则 CLH 队列是 “共享锁” 队列。
         Node nextWaiter;
 
+        final boolean isShared() {
+            return nextWaiter == SHARED;
+        }
 
         Node() {
         }
@@ -144,7 +147,7 @@ public abstract class MyAbstractQueuedSynchronizer {
     /**
      * 尝试获取独占资源
      *
-     * 模板方法，由自定义同步器子类继承并重写
+     * 模板方法，由子类继承并重写
      */
     protected boolean tryAcquire(int arg) {
         throw new UnsupportedOperationException();
@@ -152,7 +155,7 @@ public abstract class MyAbstractQueuedSynchronizer {
 
 
     /**
-     * 获取独占资源失败的线程，构造成一个独占式节点，添加到 CLH 队列尾部。
+     * 当前线程获取独占资源失败，构造成一个独占式节点，添加到 CLH 队列尾部。
      *
      * 采用乐观并发控制方式保证线程安全
      *
@@ -209,14 +212,14 @@ public abstract class MyAbstractQueuedSynchronizer {
      * 在 CLH 队列中获取独占资源
      *
      * 当前线程添加到 CLH 队列之后，
-     * 1. 检查当前 node 是否称为 CLH 队列的二号节点
+     * 1. 检查当前 node 的前驱节点是否为 CLH 队列 head。
      * 2. 如果是，尝试获取独占资源
      *      2.1 如果获取成功，设置当前 ndoe 成为 CLH 队列的 head，返回当前线程唤醒之后的中断状态；
      *      2.2 如果获取失败，继续下面的步骤。
      * 3. 如果不是，尝试阻塞当前线程，进入 Waiting 状态
      *      3.1 如果可以阻塞，就阻塞当前线程，直到唤醒之后获取中断状态；
      *      3.2 如果不可以阻塞，继续下面的步骤。
-     * 4. 重复上述步骤
+     * 4. 重复上述步骤。
      */
     final boolean acquireQueued(final Node node, int arg) {
         // 标记是否成功拿到独占资源
@@ -226,16 +229,15 @@ public abstract class MyAbstractQueuedSynchronizer {
 
             // 自旋
             for (; ; ) {
-                final Node p = node.predecessor();
-
                 // 如果前驱是 head，那么当前节点就是二号节点，可以尝试获取独占资源
                 //
                 // 如果获取独占资源失败，尝试阻塞当前线程进入 Waiting 状态
+                final Node p = node.predecessor();
                 if (p == head && tryAcquire(arg)) {
                     // 当前尝试获取独占资源成功，设置当前节点成为 head
                     setHead(node);
 
-                    // 前驱 next 设置为 null，方便 GC
+                    // 前驱的 next 设置为 null，方便 GC
                     p.next = null;
 
                     failed = false;
@@ -340,6 +342,223 @@ public abstract class MyAbstractQueuedSynchronizer {
     static void selfInterrupt() {
         Thread.currentThread().interrupt();
     }
+
+
+
+
+
+
+    /**
+     * 独占模式下，释放独占资源
+     *
+     * final 方法，不可被继承
+     */
+    public final boolean release(int arg) {
+        // tryRelease() 尝试释放独占资源
+        if (tryRelease(arg)) {
+            // 成功释放独占资源，唤醒后继线程
+            Node h = head;
+            if (h != null && h.waitStatus != 0)
+                unparkSuccessor(h);
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * 尝试释放独占资源
+     *
+     * 模板方法，由子类继承并重写
+     */
+    protected boolean tryRelease(int arg) {
+        throw new UnsupportedOperationException();
+    }
+
+
+    /**
+     * 唤醒当前节点的后继
+     */
+    private void unparkSuccessor(Node node) {
+        // 如果当前节点状态 < 0，使用 CAS 操作尝试将状态设置为初始值 0。
+        int ws = node.waitStatus;
+        if (ws < 0)
+            compareAndSetWaitStatus(node, ws, 0);
+
+        Node s = node.next;
+
+        // 如果后继节点为空，或状态为 CANCELLED
+        // 从 CLH 队列尾部从后往前找到一个处于一个正常阻塞状态的节点，并唤醒它
+        if (s == null || s.waitStatus > 0) {
+            s = null;
+            for (Node t = tail; t != null && t != node; t = t.prev) {
+                if (t.waitStatus <= 0)
+                    s = t;
+            }
+        }
+
+        // LockSupport unpark() 唤醒线程
+        if (s != null)
+            MyLockSupport.unpark(s.thread);
+    }
+
+
+
+
+
+
+
+
+    /**
+     * 共享模式下，获取共享资源
+     *
+     * final 方法，不可被继承
+     */
+    public final void acquireShared(int arg) {
+        if (tryAcquireShared(arg) < 0)
+            // tryAcquireShared() < 0，尝试获取共享资源失败，调用 doAcquireShared()
+            doAcquireShared(arg);
+    }
+
+
+    /**
+     * 尝试获取共享资源
+     */
+    protected int tryAcquireShared(int arg) {
+        throw new UnsupportedOperationException();
+    }
+
+
+    /**
+     * 当前线程获取共享资源失败，构造节点加入 CLH 队列，在 CLH 队列中获取共享资源
+     *
+     * 当前线程添加到 CLH 队列之后，
+     * 1. 检查当前 node 的前驱节点是否为 CLH 队列 head。
+     * 2. 如果是，尝试获取共享资源
+     *      2.1 如果获取成功，设置当前 node 成为 CLH 队列的 head，并传播性的唤醒后继线程；
+     *          如果当前线程是被中断唤醒的，就调用 seIfInterrupt() 自行中断。
+     *      2.2 如果获取失败，继续下面的步骤。
+     * 3. 如果不是，尝试阻塞当前线程，进入 Waiting 状态
+     *      3.1 如果可以阻塞，就阻塞当前线程，直到唤醒之后获取中断状态；
+     *      3.2 如果不可以阻塞，继续下面的步骤。
+     * 4. 重复上述步骤。
+     */
+    private void doAcquireShared(int arg) {
+        // 当前线程获取共享资源失败，构造成一个共享式节点，添加到 CLH 队列尾部。
+        final Node node = addWaiter(Node.SHARED);
+
+        boolean failed = true;
+        try {
+            boolean interrupted = false;
+
+            // 自旋
+            for (; ; ) {
+                // 如果前驱是 head，那么当前节点就是二号节点，可以尝试获取共享资源。
+                final Node p = node.predecessor();
+                if (p == head) {
+                    int r = tryAcquireShared(arg);
+
+                    // 如果获取共享资源成功，将当前节点设置为 head，
+                    // 如果还有可用资源，传播下去，继续唤醒后继线程。
+                    if (r >= 0) {
+                        setHeadAndPropagate(node, r);
+
+                        // 前驱的 next 设置为 null，方便 GC
+                        p.next = null;
+
+                        if (interrupted)
+                            selfInterrupt();
+
+                        failed = false;
+                        return;
+                    }
+                }
+
+                // 首先调用 shouldParkAfterFailedAcquire() 判断当前线程是否可以被阻塞进入 Waiting 状态。
+                //
+                // 如果 shouldParkAfterFailedAcquire() = false，当前线程不可以进入 Waiting 状态，那就继续自旋。
+                //
+                // 如果 shouldParkAfterFailedAcquire() = true，表示当前线程可以进入 Waiting 状态，
+                // 调用 parkAndCheckInterrupt() 方法阻塞当前线程，并返回当前线程的中断状态。
+                //
+                //      如果 parkAndCheckInterrupt() = false，表示当前线程已经被唤醒，并且不是被中断唤醒，那就继续自旋。
+                if (shouldParkAfterFailedAcquire(p, node) &&
+                        parkAndCheckInterrupt())
+                    interrupted = true;
+            }
+        } finally {
+            // 意外
+            // 方法返回前，当前线程获取独占资源失败
+            // TODO: 怎么可能？
+//            if (failed)
+//                cancelAcquire(node);
+        }
+    }
+
+
+    /**
+     * 设置 head，如果共享资源充足，继续唤醒后继线程。
+     */
+    private void setHeadAndPropagate(Node node, int propagate) {
+        Node h = head;
+        setHead(node);
+
+        if (propagate > 0 || h == null || h.waitStatus < 0) {
+            Node s = node.next;
+            if (s == null || s.isShared())
+                doReleaseShared();
+        }
+    }
+
+
+    /**
+     * 共享模式下，释放共享资源
+     */
+    public final boolean releaseShared(int arg) {
+        if (tryReleaseShared(arg)) {
+            doReleaseShared();
+            return true;
+        }
+        return false;
+    }
+
+
+    protected boolean tryReleaseShared(int arg) {
+        throw new UnsupportedOperationException();
+    }
+
+
+    /**
+     * 释放共享资源
+     */
+    private void doReleaseShared() {
+        for (; ; ) {
+            Node h = head;
+            if (h != null && h != tail) {
+                int ws = h.waitStatus;
+                if (ws == Node.SIGNAL) {
+                    // 如果 head 的状态为 SIGNAL，使用 CAS 操作尝试设置其状态为初始值 0；
+                    // 如果设置状态失败，直接进入下一轮循环，相当于自旋。
+                    if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))
+                        continue;
+
+                    // 如果 CAS 操作设置节点状态成功，唤醒 head 的后继节点。
+                    unparkSuccessor(h);
+                } else
+                    // 如果 head 节点的状态为 0，使用 CAS 操作尝试设置其状态为 PROPAGATE；
+                    // 如果设置状态成功，继续后面步骤。
+                    if (ws == 0 &&
+                        !compareAndSetWaitStatus(h, 0, Node.PROPAGATE)) {
+                        // 如果设置状态失败，直接进入下一轮循环，相等于自旋。
+                        continue;
+                }
+            }
+
+            if (h == head)
+                break;
+        }
+    }
+
 
 
 

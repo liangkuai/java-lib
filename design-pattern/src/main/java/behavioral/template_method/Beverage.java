@@ -8,6 +8,8 @@ public abstract class Beverage {
 
     /**
      * 模板方法
+     *
+     * 定义了算法框架
      */
     public final void prepareRecipe() {
         boilWater();

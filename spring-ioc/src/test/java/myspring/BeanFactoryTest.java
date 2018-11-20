@@ -1,11 +1,13 @@
 package myspring;
 
 import myspring.bean.BeanDefinition;
-import myspring.bean.PropertyValue;
-import myspring.bean.PropertyValues;
 import myspring.bean.factory.AutowireCapableBeanFactory;
 import myspring.bean.factory.BeanFactory;
+import myspring.bean.factory.XmlBeanDefinitionReader;
+import myspring.bean.io.ResourceLoader;
 import org.junit.Test;
+
+import java.util.Map;
 
 /**
  * @author liangkuai
@@ -14,25 +16,21 @@ import org.junit.Test;
 public class BeanFactoryTest {
 
     @Test
-    public void Test() {
+    public void Test() throws Exception {
+        // 1. 读取 bean 配置
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
+        xmlBeanDefinitionReader.loadBeanDefinitions("ioc.xml");
 
-        // 1.初始化 BeanFactory
+
+        // 2. 初始化 BeanFactory，注册 bean
         BeanFactory beanFactory = new AutowireCapableBeanFactory();
 
-        // 2.创建 BeanDefinition 实例存储 bean 信息
-        BeanDefinition beanDefinition = new BeanDefinition();
-        beanDefinition.setBeanClassName("myspring.HelloService");
+        for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()) {
+            beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
+        }
 
-        // 3.设置 bean 的属性
-        PropertyValues propertyValues = new PropertyValues();
-        propertyValues.addPropertyValue(new PropertyValue("text", "Hello world"));
-        beanDefinition.setPropertyValues(propertyValues);
-
-        // 4.将 BeanDefinition 注册到 BeanFactory
-        beanFactory.registerBeanDefinition("helloService", beanDefinition);
-
-        // 5.获取 bean
-        HelloService helloWorldService = (HelloService) beanFactory.getBean("helloService");
-        helloWorldService.hello();
+        // 3. 获取 bean
+        HelloService helloService = (HelloService) beanFactory.getBean("helloService");
+        helloService.hello();
     }
 }

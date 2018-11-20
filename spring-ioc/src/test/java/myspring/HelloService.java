@@ -6,7 +6,13 @@ package myspring;
  */
 public class HelloService {
 
-    public void hello() {
-        System.out.println("Hello world");
+    private String text;
+
+    public void hello(){
+        System.out.println(text);
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

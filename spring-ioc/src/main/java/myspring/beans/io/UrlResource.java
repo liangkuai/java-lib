@@ -1,4 +1,4 @@
-package myspring.bean.io;
+package myspring.beans.io;
 
 import java.io.IOException;
 import java.io.InputStream;

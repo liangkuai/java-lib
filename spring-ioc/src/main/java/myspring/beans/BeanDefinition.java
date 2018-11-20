@@ -1,4 +1,4 @@
-package myspring.bean;
+package myspring.beans;
 
 /**
  * @author liangkuai

@@ -1,6 +1,6 @@
-package myspring.bean;
+package myspring.beans;
 
-import myspring.bean.io.ResourceLoader;
+import myspring.beans.io.ResourceLoader;
 
 import java.util.HashMap;
 import java.util.Map;

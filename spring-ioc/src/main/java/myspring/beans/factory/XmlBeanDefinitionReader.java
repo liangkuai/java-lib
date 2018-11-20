@@ -1,10 +1,10 @@
-package myspring.bean.factory;
+package myspring.beans.factory;
 
-import myspring.bean.AbstractBeanDefinitionReader;
-import myspring.bean.BeanDefinition;
-import myspring.bean.BeanReference;
-import myspring.bean.PropertyValue;
-import myspring.bean.io.ResourceLoader;
+import myspring.beans.AbstractBeanDefinitionReader;
+import myspring.beans.BeanDefinition;
+import myspring.beans.BeanReference;
+import myspring.beans.PropertyValue;
+import myspring.beans.io.ResourceLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

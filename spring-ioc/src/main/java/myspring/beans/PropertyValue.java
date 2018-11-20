@@ -1,4 +1,4 @@
-package myspring.bean;
+package myspring.beans;
 
 /**
  * bean 的属性

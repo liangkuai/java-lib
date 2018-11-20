@@ -1,6 +1,6 @@
-package myspring.bean.factory;
+package myspring.beans.factory;
 
-import myspring.bean.BeanDefinition;
+import myspring.beans.BeanDefinition;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,7 +18,6 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 
     private final List<String> beanDefinitionNames = new ArrayList<>();
 
-    @Override
     public void registerBeanDefinition(String name, BeanDefinition beanDefinition) {
         beanDefinitionMap.put(name, beanDefinition);
 

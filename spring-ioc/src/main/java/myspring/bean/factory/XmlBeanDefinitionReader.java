@@ -2,6 +2,7 @@ package myspring.bean.factory;
 
 import myspring.bean.AbstractBeanDefinitionReader;
 import myspring.bean.BeanDefinition;
+import myspring.bean.BeanReference;
 import myspring.bean.PropertyValue;
 import myspring.bean.io.ResourceLoader;
 import org.w3c.dom.Document;
@@ -71,7 +72,19 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 Element propertyEle = (Element) node;
                 String name = propertyEle.getAttribute("name");
                 String value = propertyEle.getAttribute("value");
-                beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name,value));
+
+                if (value != null && value.length() > 0) {
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                } else {
+                    String ref = propertyEle.getAttribute("ref");
+                    if (ref == null || ref.length() == 0) {
+                        throw new IllegalArgumentException("Configuration problem: <property> element for property '"
+                                + name + "' must specify a ref or value");
+                    }
+                    BeanReference beanReference = new BeanReference(ref);
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+                }
+
             }
         }
     }

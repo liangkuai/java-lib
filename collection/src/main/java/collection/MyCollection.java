@@ -1,14 +1,12 @@
-import java.util.Iterator;
+package collection;
 
-public interface MyCollection<E> extends Iterator<E> {
+public interface MyCollection<E> {
 
     int size();
 
     boolean isEmpty();
 
     boolean contains();
-
-    Iterator<E> iterator();
 
     Object[] toArray();
 

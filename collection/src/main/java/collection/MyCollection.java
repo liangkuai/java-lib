@@ -1,34 +1,49 @@
 package collection;
 
-public interface MyCollection<E> {
+import common.MyIterable;
+import common.MyIterator;
+
+/**
+ * 顶级接口
+ *
+ * @see common.MyIterable 集合都可以迭代
+ */
+public interface MyCollection<E> extends MyIterable<E> {
+
+    @Override
+    MyIterator<E> iterator();
+
+
 
     int size();
 
     boolean isEmpty();
 
-    boolean contains();
 
-    Object[] toArray();
 
-    <T> T[] toArray(T[] a);
+    /**
+     * 是否包含某个 object
+     *
+     * @param o TODO: 为什么参数 key 是 Object 对象
+     */
+    boolean contains(Object o);
 
+
+
+    /**
+     * 增加
+     */
     boolean add(E e);
 
+
+
+    /**
+     * 删除
+     */
     boolean remove(Object o);
 
-    boolean containsAll(MyCollection<?> c);
-
-    boolean addAll(MyCollection<? extends E> c);
-
-    boolean removeAll(MyCollection<?> c);
-
-    boolean retainAll(MyCollection<?> c);
-
+    /**
+     * 清空
+     */
     void clear();
-
-    @Override
-    boolean equals(Object o);
-
-    @Override
-    int hashCode();
 }

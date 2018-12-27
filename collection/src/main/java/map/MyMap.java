@@ -8,10 +8,11 @@ package map;
  */
 public interface MyMap<K, V> {
 
-
     int size();
 
     boolean isEmpty();
+
+
 
     /**
      * 查找
@@ -22,9 +23,19 @@ public interface MyMap<K, V> {
 
 
     /**
+     * 是否包含某个 object
+     *
+     * @param key TODO: 为什么参数 key 是 Object 对象
+     */
+    boolean containKey(Object key);
+
+
+
+    /**
      * 增加
      */
     V put(K key, V value);
+
 
 
     /**
@@ -39,11 +50,4 @@ public interface MyMap<K, V> {
      */
     void clear();
 
-
-    /**
-     * 是否包含
-     *
-     * @param key TODO: 为什么参数 key 是 Object 对象
-     */
-    boolean containKey(Object key);
 }

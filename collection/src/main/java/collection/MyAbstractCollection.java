@@ -1,23 +1,35 @@
 package collection;
 
-import java.util.Arrays;
-import java.util.Iterator;
+import common.MyIterator;
 
-public abstract class MyAbstractCollection<E> implements MyCollection {
+/**
+ * 集合基本实现
+ *
+ * @param <E>
+ */
+public abstract class MyAbstractCollection<E> implements MyCollection<E> {
 
-    protected MyAbstractCollection() {
-    }
 
-    public abstract Iterator<E> iterator();
+    @Override
+    public abstract MyIterator<E> iterator();
 
+
+    @Override
     public abstract int size();
 
+    @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
+
+
+    /**
+     * 通过 iterator 遍历比较判断
+     */
+    @Override
     public boolean contains(Object o) {
-        Iterator<E> it = iterator();
+        MyIterator<E> it = iterator();
         if (o == null) {
             while (it.hasNext())
                 if (it.next() == null)
@@ -30,40 +42,46 @@ public abstract class MyAbstractCollection<E> implements MyCollection {
         return false;
     }
 
-    public Object[]
-    toArray() {
-        Object[] r = new Object[size()];
-        Iterator<E> it = iterator();
-        for (int i = 0; i < r.length; i++) {
-            if (!it.hasNext())  // 元素为 null，结束转换
-                return Arrays.copyOf(r, i);
-            r[i] = it.next();
-        }
-        return it.hasNext() ? finishToArray(r, it) : r;
-    }
 
-    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
-    private static <T> T[] finishToArray(T[] r, Iterator<?> it) {
-        int i = r.length;
-        while (it.hasNext()) {
-            int cap = r.length;
-            if (i == cap) {
-                int newCap = cap + (cap >> 1) + 1;
-                if (newCap - MAX_ARRAY_SIZE > 0)
-                    newCap = hugeCapacity(cap + 1);
-                r = Arrays.copyOf(r, newCap);
+    @Override
+    public abstract boolean add(E e);
+
+
+
+    /**
+     * 通过 iterator 遍历比较判断
+     */
+    @Override
+    public boolean remove(Object o) {
+        MyIterator<E> it = iterator();
+        if (o == null) {
+            while (it.hasNext()) {
+                if (it.next() == null) {
+                    it.remove();
+                    return true;
+                }
             }
-            r[i++] = (T) it.next();
+        } else {
+            while (it.hasNext()) {
+                if (o.equals(it.next())) {
+                    it.remove();
+                    return true;
+                }
+            }
         }
-        return (i == r.length) ? r : Arrays.copyOf(r, i);
+        return false;
     }
 
-    private static int hugeCapacity(int minCapacity) {
-        if (minCapacity < 0)
-            throw new OutOfMemoryError("Required array size too large");
-        return (minCapacity > MAX_ARRAY_SIZE) ?
-                Integer.MAX_VALUE :
-                MAX_ARRAY_SIZE;
+    /**
+     * 通过 iterator 遍历删除
+     */
+    @Override
+    public void clear() {
+        MyIterator<E> it = iterator();
+        while (it.hasNext()) {
+            it.next();
+            it.remove();
+        }
     }
 }

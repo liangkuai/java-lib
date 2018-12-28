@@ -11,13 +11,6 @@ public abstract class MyAbstractCollection<E> implements MyCollection<E> {
 
 
     @Override
-    public abstract MyIterator<E> iterator();
-
-
-    @Override
-    public abstract int size();
-
-    @Override
     public boolean isEmpty() {
         return size() == 0;
     }
@@ -41,11 +34,6 @@ public abstract class MyAbstractCollection<E> implements MyCollection<E> {
         }
         return false;
     }
-
-
-
-    @Override
-    public abstract boolean add(E e);
 
 
 

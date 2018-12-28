@@ -6,6 +6,8 @@ import common.MyIterator;
 /**
  * 顶级接口
  *
+ * 集合，基本操作
+ *
  * @see common.MyIterable 集合都可以迭代
  */
 public interface MyCollection<E> extends MyIterable<E> {

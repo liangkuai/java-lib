@@ -1,12 +1,29 @@
 package map;
 
 /**
- * map 顶级接口
+ * 顶级接口
+ *
+ * 键值对集合
  *
  * @author liangkuai
  * @date 2018/12/7
  */
 public interface MyMap<K, V> {
+
+
+    /**
+     * 键值对
+     */
+    interface MyEntry<K, V> {
+
+        K getKey();
+
+        V getValue();
+
+        V setValue();
+    }
+
+
 
     int size();
 

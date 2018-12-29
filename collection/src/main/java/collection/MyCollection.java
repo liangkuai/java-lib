@@ -6,11 +6,12 @@ import common.MyIterator;
 /**
  * 顶级接口
  *
- * 集合，基本操作
+ * 集合，声明了集合的基本操作
  *
  * @see common.MyIterable 集合都可以迭代
  */
 public interface MyCollection<E> extends MyIterable<E> {
+
 
     @Override
     MyIterator<E> iterator();
@@ -33,7 +34,7 @@ public interface MyCollection<E> extends MyIterable<E> {
 
 
     /**
-     * 增加
+     * 增加，增加到集合末尾
      */
     boolean add(E e);
 

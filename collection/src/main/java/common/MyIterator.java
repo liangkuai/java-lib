@@ -14,5 +14,8 @@ public interface MyIterator<E> {
 
     E next();
 
+    /**
+     * 删除上一次 next() 方法返回的元素
+     */
     void remove();
 }

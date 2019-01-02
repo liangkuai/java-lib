@@ -7,5 +7,11 @@ import common.MyIterator;
  */
 public interface MyListIterator<E> extends MyIterator<E> {
 
+    boolean hasPrevious();
+
     E previous();
+
+    void set(E e);
+
+    void add(E e);
 }

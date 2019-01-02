@@ -6,14 +6,14 @@ import common.MyIterator;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 
-public abstract class MyAbstractList<E> extends MyAbstractCollection<E>
-        implements MyList<E> {
+public abstract class MyAbstractList<E> extends MyAbstractCollection<E> implements MyList<E> {
 
 
     @Override
     public MyIterator<E> iterator() {
         return new Itr();
     }
+
 
     /**
      * fail-fast 机制
@@ -117,7 +117,9 @@ public abstract class MyAbstractList<E> extends MyAbstractCollection<E>
 
 
     /**
-     * 整个 list 的 hashcode 和所有元素有关
+     * list 的 hashcode 和每一个元素有关，依赖元素 E 的 hashcode() 方法
+     *
+     * 通过 foreach 语法遍历
      */
     @Override
     public int hashCode() {

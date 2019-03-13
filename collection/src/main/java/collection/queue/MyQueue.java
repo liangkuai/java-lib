@@ -1,14 +1,12 @@
 package collection.queue;
 
-import collection.MyCollection;
-
 /**
  * 队列
  *
  * @author liangkuai
  * @date 2018/12/7
  */
-public interface MyQueue<E> extends MyCollection<E> {
+public interface MyQueue<E> {
 
 
     /**
@@ -20,16 +18,16 @@ public interface MyQueue<E> extends MyCollection<E> {
 
     /**
      * 出队列
+     *
+     * 如果队列为空，返回 null
      */
-    E remove();
-
     E poll();
 
 
     /**
      * 获取队列头
+     *
+     * 如果队列为空，返回 null
      */
-    E element();
-
     E peek();
 }

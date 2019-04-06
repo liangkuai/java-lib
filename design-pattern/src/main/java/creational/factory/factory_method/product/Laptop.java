@@ -6,6 +6,6 @@ package creational.factory.factory_method.product;
  * @author liangkuai
  * @date 2018/11/11
  */
-public interface Shape {
-    void draw();
+public interface Laptop {
+    void start();
 }

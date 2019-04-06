@@ -1,6 +1,6 @@
 package creational.factory.simple_factory;
 
-import creational.factory.simple_factory.product.Shape;
+import creational.factory.simple_factory.product.Laptop;
 
 /**
  * @author liangkuai
@@ -9,12 +9,12 @@ import creational.factory.simple_factory.product.Shape;
 public class Client {
 
     public static void main(String[] args) {
-        // 获取 Circle 的对象，并调用它的 draw 方法
-        Shape circle = ShapeFactory.getShape("CIRCLE");
-        circle.draw();
+        // 获取 ChromeBook 的对象
+        Laptop chromeBook = LaptopFactory.getLaptop("Apple");
+        chromeBook.start();
 
-        // 获取 Square 的对象，并调用它的 draw 方法
-        Shape square = ShapeFactory.getShape("SQUARE");
-        square.draw();
+        // 获取 MacBook 的对象
+        Laptop macBook = LaptopFactory.getLaptop("Google");
+        macBook.start();
     }
 }

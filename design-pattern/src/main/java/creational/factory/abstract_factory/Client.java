@@ -1,10 +1,10 @@
 package creational.factory.abstract_factory;
 
 
-import creational.factory.abstract_factory.factory.AKFactory;
+import creational.factory.abstract_factory.factory.AppleFactory;
 import creational.factory.abstract_factory.factory.Factory;
-import creational.factory.abstract_factory.product.bullet.Bullet;
-import creational.factory.abstract_factory.product.gun.Gun;
+import creational.factory.abstract_factory.product.laptop.Laptop;
+import creational.factory.abstract_factory.product.phone.Phone;
 
 /**
  * @author liangkuai
@@ -14,15 +14,16 @@ public class Client {
 
     public static void main(String[] args) {
         Factory factory;
-        Gun gun;
-        Bullet bullet;
 
-        factory =new AKFactory();
+        Phone phone;
+        Laptop laptop;
 
-        gun=factory.produceGun();
-        gun.shooting();
+        factory =new AppleFactory();
 
-        bullet=factory.produceBullet();
-        bullet.load();
+        phone=factory.producePhone();
+        phone.sendMessage();
+
+        laptop=factory.produceLaptop();
+        laptop.start();
     }
 }

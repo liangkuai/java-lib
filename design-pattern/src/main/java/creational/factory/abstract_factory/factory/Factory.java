@@ -1,7 +1,7 @@
 package creational.factory.abstract_factory.factory;
 
-import creational.factory.abstract_factory.product.bullet.Bullet;
-import creational.factory.abstract_factory.product.gun.Gun;
+import creational.factory.abstract_factory.product.laptop.Laptop;
+import creational.factory.abstract_factory.product.phone.Phone;
 
 /**
  * 抽象工厂
@@ -10,6 +10,7 @@ import creational.factory.abstract_factory.product.gun.Gun;
  * @date 2018/11/11
  */
 public interface Factory {
-    Gun produceGun();
-    Bullet produceBullet();
+    Laptop produceLaptop();
+
+    Phone producePhone();
 }

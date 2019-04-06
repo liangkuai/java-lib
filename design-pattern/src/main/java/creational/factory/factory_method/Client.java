@@ -1,8 +1,8 @@
 package creational.factory.factory_method;
 
-import creational.factory.factory_method.factory.CircleFactory;
-import creational.factory.factory_method.factory.Factory;
-import creational.factory.factory_method.product.Shape;
+import creational.factory.factory_method.factory.LaptopFactory;
+import creational.factory.factory_method.factory.MacBookFactory;
+import creational.factory.factory_method.product.Laptop;
 
 /**
  * @author liangkuai
@@ -10,8 +10,8 @@ import creational.factory.factory_method.product.Shape;
  */
 public class Client {
     public static void main(String[] args) {
-        Factory circleFactory = new CircleFactory();
-        Shape circle = circleFactory.getShape();
-        circle.draw();
+        LaptopFactory appleFactory = new MacBookFactory();
+        Laptop macBook = appleFactory.getLaptop();
+        macBook.start();
     }
 }

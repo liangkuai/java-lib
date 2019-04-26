@@ -130,8 +130,24 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
                 } else if (current.leftChild == null) {
                     root = current.rightChild;
                 } else {
-                    root = current.leftChild;
-                    current.leftChild = current.rightChild;
+                    // 后继节点替换
+                    Node succeed = current.rightChild;
+                    Node sucParent = current;
+                    while (succeed.leftChild != null) {
+                        sucParent = succeed;
+                        succeed = succeed.leftChild;
+                    }
+
+                    if (succeed.key.compareTo(sucParent.key) < 0) {
+                        sucParent.leftChild = succeed.rightChild;
+                    } else {
+                        sucParent.rightChild = succeed.rightChild;
+                    }
+
+                    root = succeed;
+
+                    succeed.leftChild = current.leftChild;
+                    succeed.rightChild = current.rightChild;
                 }
             } else {
                 // 删除非根节点

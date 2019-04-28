@@ -14,7 +14,7 @@ public abstract class AbstractTree<K, V> {
     /**
      * 查找，递归
      */
-    public abstract V getByRecursive(K key);
+    public abstract V getByRecursion(K key);
 
 
     /**
@@ -26,8 +26,16 @@ public abstract class AbstractTree<K, V> {
     /**
      * 插入，递归
      */
-    public abstract void putByRecursive(K key, V val);
+    public abstract void putByRecursion(K key, V val);
 
 
+    /**
+     * 删除，迭代
+     */
     public abstract void remove(K key);
+
+    /**
+     * 删除，递归
+     */
+    public abstract void removeByRecursion(K key);
 }

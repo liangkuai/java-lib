@@ -63,6 +63,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractTree<K
     public void put(K key, V val) {
         if (root == null) {
             root = new Node(key, val);
+            return;
         }
 
         Node node = root;
@@ -120,43 +121,96 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractTree<K
      */
     @Override
     public void remove(K key) {
+        Node cur = root;
+        Node par = null;
 
+        while (cur != null) {
+            int cmp = key.compareTo(cur.key);
+            if (cmp == 0) {
+                break;
+            } else {
+                par = cur;
+                cur = cmp < 0 ? cur.left : cur.right;
+            }
+        }
+
+        if (cur == root) {
+            remove(cur);
+            return;
+        }
+
+        if (par.left == cur) {
+            par.left = remove(cur);
+        } else {
+            par.right = remove(cur);
+        }
     }
+
+    /**
+     * @param cur 要删除的节点
+     */
+    private Node remove(Node cur) {
+        if (cur == null) return null;
+
+        if (cur.left == null) return cur.right;
+        if (cur.right == null) return cur.left;
+
+        // 要删除的节点具有两个子节点
+        Node succssor = cur.right;
+        Node par = null;
+        while (succssor.left != null) {
+            par = succssor;
+            succssor = succssor.left;
+        }
+
+        succssor.left = cur.left;
+
+        if (succssor != cur.right) {
+            par.left = succssor.right;
+            succssor.right = cur.right;
+        }
+        return succssor;
+    }
+
 
     @Override
     public void removeByRecursion(K key) {
         removeByRecursion(root, key);
     }
 
-    private Node removeByRecursion(Node root, K key) {
-        if (root == null) return null;
+    /**
+     * @param cur 要删除的节点
+     */
+    private Node removeByRecursion(Node cur, K key) {
+        if (cur == null) return null;
 
-        int cmp = key.compareTo(root.key);
+        int cmp = key.compareTo(cur.key);
 
         if (cmp < 0) {
-            root.left = removeByRecursion(root.left, key);
+            cur.left = removeByRecursion(cur.left, key);
         } else if (cmp > 0) {
-            root.right = removeByRecursion(root.right, key);
+            cur.right = removeByRecursion(cur.right, key);
         } else {
-            if (root.left == null) return root.right;
-            if (root.right == null) return root.left;
+            if (cur.left == null) return cur.right;
+            if (cur.right == null) return cur.left;
 
             // 要删除的节点具有两个子节点
-            Node succssor = root.right, par = null;
-            while(succssor.left != null){
+            Node succssor = cur.right;
+            Node par = null;
+            while (succssor.left != null) {
                 par = succssor;
                 succssor = succssor.left;
             }
-            if(par == null){
-                succssor.left = root.left;
-                return succssor;
+
+            succssor.left = cur.left;
+
+            if (succssor != cur.right) {
+                par.left = succssor.right;
+                succssor.right = cur.right;
             }
-            par.left = succssor.right;
-            succssor.left = root.left;
-            succssor.right = root.right;
             return succssor;
         }
-        return root;
+        return cur;
     }
 
 

@@ -1,6 +1,6 @@
-package Tree.bst;
+package tree.bst;
 
-import Tree.AbstractTree;
+import tree.AbstractTree;
 
 
 /**

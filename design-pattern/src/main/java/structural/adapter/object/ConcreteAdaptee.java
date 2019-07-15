@@ -1,4 +1,4 @@
-package structural.adapter;
+package structural.adapter.object;
 
 /**
  * 具体被适配类

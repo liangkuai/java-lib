@@ -1,5 +1,10 @@
 package structural.adapter.object;
 
+import structural.adapter.object.adaptee.AndroidCharger;
+import structural.adapter.object.adaptee.UsbPlug;
+import structural.adapter.object.adapter.TwoPlugAdapter;
+import structural.adapter.object.target.TwoPlug;
+
 /**
  * @author liangkuai
  * @date 2018/10/7
@@ -7,15 +12,11 @@ package structural.adapter.object;
 public class Client {
 
     public static void main(String[] args) {
+        PowerSocket powerSocket = new PowerSocket();
 
-        Target target = new ConcreteTarget();
-        System.out.println("无适配器：");
-        target.chargeOf240V();
-        System.out.println();
+        UsbPlug charger = new AndroidCharger();
+        TwoPlug adapter = new TwoPlugAdapter(charger);
 
-        Adaptee adaptee = new ConcreteAdaptee();
-        Target adapter = new Adapter(adaptee);
-        System.out.println("120V 充电器使用适配器：");
-        adapter.chargeOf240V();
+        powerSocket.charge(adapter);
     }
 }

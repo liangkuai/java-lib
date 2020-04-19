@@ -1,4 +1,4 @@
-package sort.internal.comparison.merge;
+package sort.merge;
 
 
 import java.util.Arrays;
@@ -13,6 +13,7 @@ public class MergeSortTest {
         int[] a = {49, 38, 65, 97, 76, 13, 27};
 
         MergeSort s = new MergeSort();
-        System.out.println(Arrays.toString(s.sort(a)));
+        s.sort(a);
+        System.out.println(Arrays.toString(a));
     }
 }

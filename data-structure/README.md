@@ -14,7 +14,7 @@
     
     2. [堆排序](src/main/java/sort/internal/comparison/heap/README.md)
 
-3. [归并排序](src/main/java/sort/internal/comparison/merge/README.md)
+3. [归并排序](../algorithm/src/main/java/sort/merge/README.md)
 
 4. 交换排序
 

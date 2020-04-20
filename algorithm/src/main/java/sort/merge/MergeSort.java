@@ -12,7 +12,7 @@ public class MergeSort {
     /* ------------------------ 递归 ------------------------ */
 
     /**
-     * 对无序数组进行归并排序
+     * 对无序数组进行归并排序（递归）
      *
      * @param a 待排数组
      */
@@ -79,6 +79,53 @@ public class MergeSort {
 
     /* ------------------------ 迭代 ------------------------ */
 
+    /**
+     * 对无序数组进行归并排序（迭代）
+     *
+     * @param a 待排数组
+     */
+    public void sortByIteration(int[] a) {
+        int len = a.length;
+        if (len <= 1) return;
 
+        int[] tmp = new int[len];
+        for (int i = 2; i < len * 2; i *= 2) {
+            sortByIteration(a, i, tmp);
+        }
+    }
+
+    /**
+     * 对数组 a 的每 sublen 个元素进行归并排序
+     *
+     * @param a 待排数组
+     * @param sublen 子区间元素数量
+     * @param tmp 临时数组
+     */
+    private void sortByIteration(int[] a, int sublen, int[] tmp) {
+        int len = a.length;
+
+        for (int i = 0; i < len; i += sublen) {
+            int right = i + sublen;
+            int mid = i + sublen / 2;
+
+            // 如果数组 a 的最后一部分不足 (sublen/2) 个，
+            // [i, sublen/2 - 1] 已经有序，直接返回
+            if (mid >= len) {
+                continue;
+            }
+
+            // 如果数组 a 的最后一部分不足 sublen 个，
+            // end 取最后一个元素下标
+            int end = right > len ? (len - 1) : right - 1;
+
+            // 如果数组的这个子区间已经有序，无需归并
+            if (a[mid - 1] < a[mid]) {
+                continue;
+            }
+
+            // 归并
+            merge(a, i, mid, end, tmp);
+        }
+    }
 
 }

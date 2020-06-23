@@ -6,4 +6,5 @@ public abstract class MyAbstractMap<K, V> implements MyMap<K, V> {
     public boolean isEmpty() {
         return size() == 0;
     }
+
 }

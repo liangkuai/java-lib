@@ -5,6 +5,6 @@
 
 - [并发](./concurrent/README.md)
 
-- [设计模式](./design-pattern/README.md)
+- [设计模式](/docs/design-pattern/README.md)
 
 - [Spring](./docs/spring)

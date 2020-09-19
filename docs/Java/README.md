@@ -3,16 +3,12 @@
 ### [JDK](/docs/Java/JDK.md)
 
 ### 基础
-
 - [x] [数据类型](/docs/Java/基础/数据类型.md)
-
 - [x] [`==` 和 `equals()`](/docs/Java/基础/==和equals().md)
-
 - [x] [Comparable / Comparator](/docs/Java/基础/Comparable_Comparator.md)
 
 
 ### 类
-
 - [x] [内部类](/docs/Java/类/内部类.md)
     - [x] 静态内部类
 
@@ -21,32 +17,25 @@
 ## JVM
 
 ### JVM 运行时数据区域
-
 - [intro](/docs/Java/JVM/JVM运行时数据区域/README.md)
-
 - [x] [1. 程序计数器](/docs/Java/JVM/JVM运行时数据区域/程序计数器.md)
-
 - [x] [2. Java 虚拟机栈](/docs/Java/JVM/JVM运行时数据区域/Java虚拟机栈.md)
-
 - [x] [3. 本地方法栈](/docs/Java/JVM/JVM运行时数据区域/本地方法栈.md)
-
 - [x] [4. 堆](/docs/Java/JVM/JVM运行时数据区域/堆.md)
-
 - [x] [5. 方法区](/docs/Java/JVM/JVM运行时数据区域/方法区.md)
     - 方法区与永久代
     - 方法区与元空间
-
 - [x] [6. 运行时常量池](/docs/Java/JVM/JVM运行时数据区域/运行时常量池.md)
-
 - [ ] [7. 直接内存](/docs/Java/JVM/JVM运行时数据区域/直接内存.md)
 
-### [关于引用类型](/docs/Java/JVM/关于引用类型.md)
+
+### JVM 垃圾回收
+- [关于引用类型](/docs/Java/JVM/JVM垃圾回收/关于引用类型.md)
 
 ### [HotSpot VM - 堆中的对象](/docs/Java/JVM/HotSpot中的对象.md)
 
 
 ### 类加载子系统
-
 - [x] [类加载过程](/docs/Java/JVM/类加载子系统/类加载过程.md)
     - 加载
     - 连接
@@ -57,7 +46,6 @@
         - [ ] 类初始化和接口初始化的区别
     - [ ] 卸载
     - [ ] 数组类型的加载过程
-
 - [x] [类加载器](/docs/Java/JVM/类加载子系统/类加载器.md)
     - 内置类加载器
     - 双亲委派模型

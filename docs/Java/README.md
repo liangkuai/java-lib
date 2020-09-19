@@ -30,7 +30,9 @@
 
 
 ### JVM 垃圾回收
-- [关于引用类型](/docs/Java/JVM/JVM垃圾回收/关于引用类型.md)
+- [x] [intro](/docs/Java/JVM/JVM垃圾回收/README.md)
+- [x] [关于引用类型](/docs/Java/JVM/JVM垃圾回收/关于引用类型.md)
+- [ ] [对象存活判断](/docs/Java/JVM/JVM垃圾回收/对象存活判断.md)
 
 ### [HotSpot VM - 堆中的对象](/docs/Java/JVM/HotSpot中的对象.md)
 

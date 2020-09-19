@@ -40,6 +40,9 @@
 
 - [ ] [7. 直接内存](/docs/Java/JVM/JVM运行时数据区域/直接内存.md)
 
+### [关于引用类型](/docs/Java/JVM/关于引用类型.md)
+
+### [HotSpot VM - 堆中的对象](/docs/Java/JVM/HotSpot中的对象.md)
 
 
 ### 类加载子系统

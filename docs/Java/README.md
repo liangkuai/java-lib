@@ -16,27 +16,6 @@
 
 ## JVM
 
-### JVM 运行时数据区域
-- [intro](/docs/Java/JVM/JVM运行时数据区域/README.md)
-- [x] [1. 程序计数器](/docs/Java/JVM/JVM运行时数据区域/程序计数器.md)
-- [x] [2. Java 虚拟机栈](/docs/Java/JVM/JVM运行时数据区域/Java虚拟机栈.md)
-- [x] [3. 本地方法栈](/docs/Java/JVM/JVM运行时数据区域/本地方法栈.md)
-- [x] [4. 堆](/docs/Java/JVM/JVM运行时数据区域/堆.md)
-- [x] [5. 方法区](/docs/Java/JVM/JVM运行时数据区域/方法区.md)
-    - 方法区与永久代
-    - 方法区与元空间
-- [x] [6. 运行时常量池](/docs/Java/JVM/JVM运行时数据区域/运行时常量池.md)
-- [ ] [7. 直接内存](/docs/Java/JVM/JVM运行时数据区域/直接内存.md)
-
-
-### JVM 垃圾回收
-- [x] [intro](/docs/Java/JVM/JVM垃圾回收/README.md)
-- [x] [关于引用类型](/docs/Java/JVM/JVM垃圾回收/关于引用类型.md)
-- [ ] [对象存活判断](/docs/Java/JVM/JVM垃圾回收/对象存活判断.md)
-
-### [HotSpot VM - 堆中的对象](/docs/Java/JVM/HotSpot中的对象.md)
-
-
 ### 类加载子系统
 - [x] [类加载过程](/docs/Java/JVM/类加载子系统/类加载过程.md)
     - 加载
@@ -52,3 +31,29 @@
     - 内置类加载器
     - 双亲委派模型
     - 自定义类加载器
+
+
+### JVM 运行时数据区域
+- [intro](/docs/Java/JVM/JVM运行时数据区域/README.md)
+- [x] [1. 程序计数器](/docs/Java/JVM/JVM运行时数据区域/程序计数器.md)
+- [x] [2. Java 虚拟机栈](/docs/Java/JVM/JVM运行时数据区域/Java虚拟机栈.md)
+- [x] [3. 本地方法栈](/docs/Java/JVM/JVM运行时数据区域/本地方法栈.md)
+- [x] [4. 堆](/docs/Java/JVM/JVM运行时数据区域/堆.md)
+- [x] [5. 方法区](/docs/Java/JVM/JVM运行时数据区域/方法区.md)
+    - 方法区与永久代
+    - 方法区与元空间
+- [x] [6. 运行时常量池](/docs/Java/JVM/JVM运行时数据区域/运行时常量池.md)
+- [ ] [7. 直接内存](/docs/Java/JVM/JVM运行时数据区域/直接内存.md)
+
+
+### [HotSpot VM - 堆中的对象](/docs/Java/JVM/HotSpot中的对象.md)
+
+
+### JVM 垃圾回收
+- [intro](/docs/Java/JVM/JVM垃圾回收/README.md)
+- [x] [关于引用类型](/docs/Java/JVM/JVM垃圾回收/关于引用类型.md)
+- [ ] [对象存活判断](/docs/Java/JVM/JVM垃圾回收/对象存活判断.md)
+- [ ] [GC 算法](/docs/Java/JVM/JVM垃圾回收/GC算法.md)
+    - 标记-清除
+    - 标记-复制
+    - 标记-整理

@@ -9,7 +9,6 @@ JDK = JRE + JVM + ...
 
 
 
-
 ## Java 环境变量
 
 从 Oracle 官方下载的 JDK 中包含了 JRE。进行 Java 开发则需要配置 Java  开发环境。
@@ -53,11 +52,11 @@ CLASSPATH 变量中的 `.` 代表当前目录。类加载器会从 Java 源代�
 
 以上这三个 CLASSPATH 变量内容没有基本类库（指所有的 `java.*` 开头的类）和扩展类库（如 `javax.*` 开头的类），也就是我们程序中经常 import 的那些 jar 包。
 
-- 在 Java 类加载机制中可以了解到，CLASSPATH 中的这些类都是由 `ApplicationClassLoader` 或者我们自定义的类加载器来加载的，这里当然不能包括基础类库，如果包括基础类库的话，用两个不同的自定义类加载器去加载该基础类，那它得到的该基础类就不是唯一的了，这样就不能保证 Java 类的安全性。
+- 在 Java 类加载机制中可以了解到，CLASSPATH 中的这些类都是由 `AppClassLoader` 或者我们自定义的类加载器来加载的，这里当然不能包括基础类库，如果包括基础类库的话，用两个不同的自定义类加载器去加载该基础类，那它得到的该基础类就不是唯一的了，这样就不能保证 Java 类的安全性。
 
 - 实际上，这些基础类库都在 `%JAVA_HOME%/jre/lib` 目录下（如其中的 `rt.jar`、`resource.jar`），Java 类加载机制中也有提到，该目录下的类（在 jar 包中）会由 `BootstrapClassLoader` 自动加载，并通过双亲委派模型保证了基础类库只会被 `BootstrapClassLoader` 加载，这也就保证了基础类的唯一性。
 
-- 另外，扩展类库在 `%JAVA_HOME%/jre/lib/ext` 目录下，该目录下的类是由 `ExtensionClassLoader` 来加载的，有时候我们也要 import 这里面的类，但是并没有基础类库用的频繁。同样，`ExtensionClassLoader` 也会自动到该目录下找扩展类，而不需要我们指定。
+- 另外，扩展类库在 `%JAVA_HOME%/jre/lib/ext` 目录下，该目录下的类是由 `ExtClassLoader` 来加载的，有时候我们也要 import 这里面的类，但是并没有基础类库用的频繁。同样，`ExtensionClassLoader` 也会自动到该目录下找扩展类，而不需要我们指定。
 
 
 ### 参考

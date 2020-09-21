@@ -4,8 +4,6 @@
 
 - 《深入理解 Java 虚拟机：JVM 高级特性与最佳实践（第3版）》—— 周志明
 
-- 《Java 并发编程实战（Java Concurrency In Practice）》—— Brian Goetz
-
 
 ### 优秀总结
 

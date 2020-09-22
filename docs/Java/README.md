@@ -14,11 +14,12 @@
 
 ### 并发
 - 线程
-    - [ ] 线程的状态
+    - [x] [线程的状态](/docs/Java/JVM/并发/Java与线程/线程的状态.md)
     - [ ] 创建线程
-    - [ ] 中断
-    - [ ] 线程间的协作
-        - [x] [`java.lang.Thread#join()`](/docs/Java/并发/线程/线程间的协作/join.md)
+    - [x] [中断](/docs/Java/并发/线程/中断.md)
+    - 线程间的协作
+        - [ ] [`java.lang.Thread` 相关](/docs/Java/并发/线程/线程间的协作/thread.md)
+        - [ ] [`java.lang.Object` 相关](/docs/Java/并发/线程/线程间的协作/object.md)
 - [ ] [ThreadLocal]()
 
 
@@ -70,8 +71,13 @@
 ### 并发
 - [x] [Java 内存模型](/docs/Java/JVM/并发/Java内存模型/README.md)
     - [ ] [内存间的交互操作](/docs/Java/JVM/并发/Java内存模型/内存间的交互操作.md)
+    - [ ] [volatile]()
+        - 内存屏障
+    - [ ] [JMM 三大特性]()
+    - [ ] [先行发生原则]()
 - [x] [Java 与线程](/docs/Java/JVM/并发/Java与线程/README.md)
     - [x] [线程的状态](/docs/Java/JVM/并发/Java与线程/线程的状态.md)
     - [ ] [线程安全](/docs/Java/JVM/并发/Java与线程/线程安全.md)
         - [ ] [线程安全的实现方式](/docs/Java/JVM/并发/Java与线程/线程安全的实现方式.md)
+- [] [锁优化]()
 - [ ] 死锁

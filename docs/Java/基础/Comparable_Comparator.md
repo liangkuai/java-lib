@@ -1,6 +1,6 @@
 # Comparable / Comparator
 
-### Comparable
+### `java.lang.Comparable`
 
 如果一个类实现了 `Comparable` 接口，表示该类“可排序”。可以直接使用 `Arrays.sort()` 和 `Collections.sort()` 排序。
 
@@ -13,7 +13,7 @@ public interface Comparable<T> {
 ```
 
 
-### Comparator
+### `java.util.Comparator`
 
 比较器接口。对于不可排序的类 A（没有实现 `Comparable` 接口），可以创建一个比较器类 C，专门用来对 A 进行排序。
 

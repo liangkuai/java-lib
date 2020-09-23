@@ -53,6 +53,7 @@
     - 方法区与元空间
 - [x] [6. 运行时常量池](/docs/Java/JVM/JVM运行时数据区域/运行时常量池.md)
 - [ ] [7. 直接内存](/docs/Java/JVM/JVM运行时数据区域/直接内存.md)
+    - 元空间
 
 
 ### [HotSpot VM - 堆中的对象](/docs/Java/JVM/HotSpot中的对象.md)
@@ -62,10 +63,14 @@
 - [intro](/docs/Java/JVM/JVM垃圾回收/README.md)
 - [x] [关于引用类型](/docs/Java/JVM/JVM垃圾回收/关于引用类型.md)
 - [ ] [对象存活判断](/docs/Java/JVM/JVM垃圾回收/对象存活判断.md)
+    - 引用计数法
+    - 可达性分析性
 - [ ] [GC 算法](/docs/Java/JVM/JVM垃圾回收/GC算法.md)
+    - 分代收集理论
     - 标记-清除
     - 标记-复制
     - 标记-整理
+- [ ] [垃圾回收器](/docs/Java/JVM/JVM垃圾回收/垃圾回收器.md)
 - [x] [内存分配和回收策略](/docs/Java/JVM/JVM垃圾回收/内存分配和回收策略.md)
 
 

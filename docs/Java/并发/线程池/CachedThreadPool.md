@@ -4,13 +4,13 @@
 
 #### 1. 创建方式
 
-`Executors` 类中提供静态方法用来创建 `CachedThreadPool` 实例：
+工具类 `Executors` 中提供静态方法用来创建 `CachedThreadPool` 实例：
 
 ```java
     /**
      * 创建一个线程池，根据需要创建新线程，但会在先前构建的线程可用时重用它。
      */
-	public static ExecutorService newCachedThreadPool(ThreadFactory threadFactory) {
+    public static ExecutorService newCachedThreadPool(ThreadFactory threadFactory) {
         return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
                                       60L, TimeUnit.SECONDS,
                                       new SynchronousQueue<Runnable>(),
@@ -38,3 +38,8 @@
 #### 3. 为什么不推荐使用 `CachedThreadPool` ？
 
 `CachedThreadPool` 允许创建的线程数量为 `Integer.MAX_VALUE`，可能会创建大量线程，导致 OOM。
+
+
+### 参考
+
+- 《Java 并发编程的艺术》

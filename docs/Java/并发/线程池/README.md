@@ -1,5 +1,9 @@
 # 线程池
 
+### 池化技术
+
+池化技术屡见不鲜，线程池、数据库连接池等等。主要目的是提高资源利用率，减少每次获取资源的消耗。
+
 
 ### 类结构
 
@@ -10,6 +14,8 @@
         - `ScheduledExecutorService`（interface）
             - `ScheduledThreadPoolExecutor`（class）
 - `Executors`（class）
+
+![线程池类结构](/assets/images/Java/thread-pool/线程池类结构.png)
 
 
 #### `Executor`

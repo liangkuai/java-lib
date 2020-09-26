@@ -26,6 +26,13 @@
         - [x] [SingleThreadExecutor](/docs/Java/并发/线程池/SingleThreadExecutor.md)
         - [x] [CachedThreadPool](/docs/Java/并发/线程池/CachedThreadPool.md)
     - [x] [ScheduledThreadPoolExecutor]()
+- 并发控制策略
+    - 悲观并发控制
+    - 乐观并发控制
+        - CAS
+- J.U.C
+    - Atomic 原子类
+    - AQS
 - [ ] [ThreadLocal]()
 
 
@@ -82,6 +89,22 @@
 - [ ] [垃圾回收器](/docs/Java/JVM/JVM垃圾回收/垃圾回收器.md)
 - [x] [内存分配和回收策略](/docs/Java/JVM/JVM垃圾回收/内存分配和回收策略.md)
 - [ ] [GC 策略](/docs/Java/JVM/JVM垃圾回收/GC策略.md)
+
+
+### Class 文件结构
+- [ ] 方法表
+    - [ ] 属性表
+        - [ ] Code
+        - [ ] Exceptions
+- [ ] 属性表
+
+
+### 字节码执行引擎
+- [ ] 运行时栈帧
+    - [ ] 局部变量表
+    - [ ] 操作数栈
+    - [ ] 动态链接
+    - [ ] 方法返回地址
 
 
 ### 并发

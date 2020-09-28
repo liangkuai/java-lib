@@ -29,9 +29,10 @@
 - 并发控制策略
     - 悲观并发控制
     - 乐观并发控制
-        - CAS
+        - [x] [CAS](/docs/Java/并发/并发控制策略/乐观并发控制/CAS.md)
 - J.U.C
-    - Atomic 原子类
+    - [x] [Atomic 原子类](/docs/Java/并发/JUC/Atomic原子类.md)
+    - [x] [自旋锁](/docs/Java/并发/JUC/自旋锁.md)
     - AQS
 - [ ] [ThreadLocal]()
 

@@ -120,9 +120,11 @@
 - [x] [Java 与线程](/docs/Java/JVM/并发/Java与线程/README.md)
     - [x] [线程的状态](/docs/Java/JVM/并发/Java与线程/线程的状态.md)
     - [ ] [线程安全](/docs/Java/JVM/并发/Java与线程/线程安全.md)
-        - [ ] [线程安全的实现方式](/docs/Java/JVM/并发/Java与线程/线程安全的实现方式.md)
+        - 线程安全的实现方式
             - 互斥同步
-                - [ ] [synchronized]()
+                - [ ] [synchronized](/docs/Java/JVM/并发/Java与线程/synchronized.md)
+                    - Monitor
+                - [ ] [ReentrantLock]()
             - 非阻塞同步
             - 无同步方案
 - [ ] [锁优化]()

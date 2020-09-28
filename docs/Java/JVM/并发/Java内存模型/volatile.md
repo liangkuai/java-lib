@@ -1,4 +1,4 @@
-# volatile
+# volatile 关键字
 
 - 保证可见性
 - 不保证原子性

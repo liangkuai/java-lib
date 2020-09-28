@@ -27,14 +27,16 @@
         - [x] [CachedThreadPool](/docs/Java/并发/线程池/CachedThreadPool.md)
     - [x] [ScheduledThreadPoolExecutor]()
 - 并发控制策略
-    - 悲观并发控制
-    - 乐观并发控制
+    - [悲观并发控制](/docs/Java/并发/并发控制策略/悲观并发控制)
+        - [ ] [synchronized]()
+    - [乐观并发控制](/docs/Java/并发/并发控制策略/乐观并发控制)
         - [x] [CAS](/docs/Java/并发/并发控制策略/乐观并发控制/CAS.md)
+        - [x] [自旋锁](/docs/Java/并发/并发控制策略/乐观并发控制/自旋锁.md)
+    - 无同步策略
+        - [ ] [ThreadLocal]()
 - J.U.C
     - [x] [Atomic 原子类](/docs/Java/并发/JUC/Atomic原子类.md)
-    - [x] [自旋锁](/docs/Java/并发/JUC/自旋锁.md)
-    - AQS
-- [ ] [ThreadLocal]()
+    - [ ] [AQS]()
 
 
 ## JVM
@@ -119,6 +121,10 @@
     - [x] [线程的状态](/docs/Java/JVM/并发/Java与线程/线程的状态.md)
     - [ ] [线程安全](/docs/Java/JVM/并发/Java与线程/线程安全.md)
         - [ ] [线程安全的实现方式](/docs/Java/JVM/并发/Java与线程/线程安全的实现方式.md)
+            - 互斥同步
+                - [ ] [synchronized]()
+            - 非阻塞同步
+            - 无同步方案
 - [ ] [锁优化]()
 - [ ] 死锁
 

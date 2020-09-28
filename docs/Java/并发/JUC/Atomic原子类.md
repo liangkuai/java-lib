@@ -1,6 +1,6 @@
 # Atomic 原子类
 
-Atomic 原子类都是具有原子/原子操作特征的类。Java 中的原子类都在 `java.util.concurrent.atomic` 包下。
+Atomic 原子类都是具有原子操作特征的类。Java 中的原子类都在 `java.util.concurrent.atomic` 包下。
 
 
 ### 实现

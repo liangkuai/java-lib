@@ -122,12 +122,17 @@
     - [ ] [线程安全](/docs/Java/JVM/并发/Java与线程/线程安全.md)
         - 线程安全的实现方式
             - 互斥同步
-                - [ ] [synchronized](/docs/Java/JVM/并发/Java与线程/synchronized.md)
+                - [ ] [`synchronized` 关键字](/docs/Java/JVM/并发/Java与线程/synchronized.md)
                     - Monitor
                 - [ ] [ReentrantLock]()
             - 非阻塞同步
             - 无同步方案
-- [ ] [锁优化]()
+- [ ] [锁优化](/docs/Java/JVM/并发/Java与线程/锁优化.md)
+    - 偏向锁
+    - 轻量级锁
+    - 自适应自旋
+    - 锁消除
+    - 锁粗化
 - [ ] 死锁
 
 

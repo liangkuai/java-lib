@@ -63,4 +63,5 @@
 ```
 -XX:+UseSpinning            // 开启自旋锁
 -XX:PreBlockSpin=10         // 自适应自旋次数
+-XX:+UseBiasedLocking       // 开启偏向锁
 ```

@@ -1,7 +1,6 @@
 # JVM 参数
 
 ### 内存相关
-
 #### 堆
 ```
 -Xms        // 堆初始大小
@@ -40,7 +39,6 @@
 
 
 ### GC 相关
-
 #### 垃圾回收器
 
 ```
@@ -57,4 +55,12 @@
 -verbose:gc                 // 输出 GC 详情
 -XX:+PrintGCDetails         // 打印 GC 详情日志
 -XX:+PrintGCDateStamps      // 打印 GC 日志时间戳
+```
+
+
+### 并发相关
+#### 锁
+```
+-XX:+UseSpinning            // 开启自旋锁
+-XX:PreBlockSpin=10         // 自适应自旋次数
 ```

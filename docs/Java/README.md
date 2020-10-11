@@ -130,7 +130,7 @@
                 - [ ] [ReentrantLock]()
             - 非阻塞同步
             - 无同步方案
-- [ ] [(synchronized) 锁优化](/docs/Java/JVM/并发/Java与线程/锁优化.md)
+- [x] [(synchronized) 锁优化](/docs/Java/JVM/并发/Java与线程/锁优化.md)
     - 自旋锁与自适应
     - 轻量级锁
     - 偏向锁

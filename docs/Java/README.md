@@ -18,8 +18,8 @@
     - [ ] [创建线程](/docs/Java/并发/线程/创建线程.md)
     - [x] [中断](/docs/Java/并发/线程/中断.md)
     - 线程间的协作
-        - [ ] [`java.lang.Thread` 相关](/docs/Java/并发/线程/线程间的协作/thread.md)
-        - [ ] [`java.lang.Object` 相关](/docs/Java/并发/线程/线程间的协作/object.md)
+        - [ ] [`java.lang.Thread` 相关（sleep / join / yield）](/docs/Java/并发/线程/线程间的协作/thread.md)
+        - [ ] [`java.lang.Object` 相关（wait / notify / notifyAll）](/docs/Java/并发/线程/线程间的协作/object.md)
 - [ ] [线程池](/docs/Java/并发/线程池)
     - [ ] [ThreadPoolExecutor](/docs/Java/并发/线程池/ThreadPoolExecutor.md)
         - [x] [FixedThreadPool](/docs/Java/并发/线程池/FixedThreadPool.md)

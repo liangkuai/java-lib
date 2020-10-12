@@ -36,4 +36,4 @@ public final native boolean compareAndSwapInt(Object o, long offset, int expect,
 
 1. ABA 问题
 
-在进行 CAS 操作前，其他线程将值 A 改为 B，然后又改回 A。这种情况下，CAS 操作无法发现值的变化。
+    在进行 CAS 操作前，其他线程将值 A 改为 B，然后又改回 A。这种情况下，CAS 操作无法发现值的变化。

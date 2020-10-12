@@ -25,15 +25,15 @@
         - [x] [FixedThreadPool](/docs/Java/并发/线程池/FixedThreadPool.md)
         - [x] [SingleThreadExecutor](/docs/Java/并发/线程池/SingleThreadExecutor.md)
         - [x] [CachedThreadPool](/docs/Java/并发/线程池/CachedThreadPool.md)
-    - [x] [ScheduledThreadPoolExecutor]()
+    - [ ] [ScheduledThreadPoolExecutor]()
 - 并发控制策略
     - [悲观并发控制](/docs/Java/并发/并发控制策略/悲观并发控制)
-        - [ ] [synchronized]()
+        - [ ] [`synchronized` 关键字](/docs/Java/JVM/并发/Java与线程/synchronized.md)
     - [乐观并发控制](/docs/Java/并发/并发控制策略/乐观并发控制)
         - [x] [CAS](/docs/Java/并发/并发控制策略/乐观并发控制/CAS.md)
         - [x] [自旋锁](/docs/Java/并发/并发控制策略/乐观并发控制/自旋锁.md)
     - 无同步策略
-        - [ ] [ThreadLocal]()
+        - [ ] [ThreadLocal](/docs/Java/并发/并发控制策略/ThreadLocal.md)
 - J.U.C
     - [x] [Atomic 原子类](/docs/Java/并发/JUC/Atomic原子类.md)
     - [ ] [AQS]()
@@ -122,13 +122,13 @@
     - [ ] [先行发生原则]()
 - [x] [Java 与线程](/docs/Java/JVM/并发/Java与线程/README.md)
     - [x] [线程的状态](/docs/Java/JVM/并发/Java与线程/线程的状态.md)
-    - [ ] [线程安全](/docs/Java/JVM/并发/Java与线程/线程安全.md)
+    - [x] [线程安全](/docs/Java/JVM/并发/Java与线程/线程安全.md)
         - 线程安全的实现方式
-            - 互斥同步
+            - 互斥同步（悲观并发控制）
                 - [ ] [`synchronized` 关键字](/docs/Java/JVM/并发/Java与线程/synchronized.md)
                     - Monitor
                 - [ ] [ReentrantLock]()
-            - 非阻塞同步
+            - 非阻塞同步（乐观并发控制）
             - 无同步方案
 - [x] [(synchronized) 锁优化](/docs/Java/JVM/并发/Java与线程/锁优化.md)
     - 自旋锁与自适应

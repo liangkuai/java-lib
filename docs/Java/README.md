@@ -91,7 +91,7 @@
 - [ ] [对象存活判断](/docs/Java/JVM/JVM垃圾回收/对象存活判断.md)
     - 引用计数法
     - 可达性分析性
-- [ ] [GC 算法](/docs/Java/JVM/JVM垃圾回收/GC算法.md)
+- [x] [GC 算法](/docs/Java/JVM/JVM垃圾回收/GC算法.md)
     - 分代收集理论
     - 标记-清除
     - 标记-复制

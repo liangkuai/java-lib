@@ -87,10 +87,10 @@
 
 ### JVM 垃圾回收
 - [intro](/docs/Java/JVM/JVM垃圾回收/README.md)
-- [x] [关于引用类型](/docs/Java/JVM/JVM垃圾回收/关于引用类型.md)
-- [ ] [对象存活判断](/docs/Java/JVM/JVM垃圾回收/对象存活判断.md)
+- [x] [对象存活判断](/docs/Java/JVM/JVM垃圾回收/对象存活判断.md)
     - 引用计数法
     - 可达性分析性
+- [x] [关于引用类型](/docs/Java/JVM/JVM垃圾回收/关于引用类型.md)
 - [x] [GC 算法](/docs/Java/JVM/JVM垃圾回收/GC算法.md)
     - 分代收集理论
     - 标记-清除

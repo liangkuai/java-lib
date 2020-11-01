@@ -2,14 +2,25 @@
 
 线程本地变量
 
+### 结构
+`Thread` 类中有一个 `ThreadLocal.ThreadLocalMap` 类的实例变量，也就是说每个线程都有自己的 `ThreadLocalMap` 用来存储 `<ThreadLocal, value>` 变量。
+
+
+### Hash 算法
+
+
+### Hash 冲突
+
+
+### 扩容
 
 
 ### FAQ
 
 #### 1. `ThreadLocalMap` 的 key 为什么要设计为 `WeakReference` ？
-`ThreadLocalMap` 的 key 是一个 `ThreadLocal` 对象，如果 key 是强引用，在这个 `ThreadLocal` 对象使用完后，把引用设置为 `null`，这个对象并不会被回收。因为线程内会保持 `ThreadLocalMap->entry->key` 的引用链，直到线程被销毁，但是这个线程很可能被放到线程池中不会被销毁，这样就产生了内存泄漏。
+`ThreadLocalMap` 的 key 是一个 `ThreadLocal` 对象，如果 key 是强引用，在这个 `ThreadLocal` 对象使用完后，把引用设置为 `null`，但是这个对象并不会被回收，因为线程内会保持 `ThreadLocalMap->entry->key` 的引用链，直到线程被销毁，但是这个线程很可能被放到线程池中不会被销毁，这样就产生了内存泄漏。
 
-JDK 通过弱引用来解决这个问题，entry 对 key 使用弱引用，当 `ThreadLocal` 对象的没有被其他强引用后，下次 GC 就可以回收 key 了。
+JDK 通过弱引用来解决这个问题，entry 对 key 使用弱引用，当 `ThreadLocal` 对象的没有被外部强引用后，下次 GC 就可以回收 key 了。
 
 > 参考：[Java中的强引用，软引用，弱引用，虚引用有什么用？ - 吕清海的回答 - 知乎](https://www.zhihu.com/question/37401125/answer/337717256)
 
@@ -25,7 +36,7 @@ JDK 通过弱引用来解决这个问题，entry 对 key 使用弱引用，当 `
 为了解决这个问题，JDK 还提供了 `InheritableThreadLocal` 类。
 
 #### 实现原理
-子线程是在父线程中通过调用 `new Thread()` 方法来创建子线程，`Thread#init` 方法在 Thread 的构造方法中被调用。在 `init()` 方法中拷贝父线程数据到子线程中：
+子线程是在父线程中通过调用 `new Thread()` 方法来创建子线程，`Thread#init` 方法在 Thread 的构造方法中被调用。**在 `init()` 方法中拷贝父线程数据到子线程中**：
 ```java
 private void init(ThreadGroup g, Runnable target, String name,
                   long stackSize, AccessControlContext acc,

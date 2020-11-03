@@ -9,11 +9,28 @@
 
 
 
-
-
-
-
-
 ### 参考
 
 - [Java新手如何学习Spring、Struts、Hibernate三大框架？ - cod3fn的回答 - 知乎](https://www.zhihu.com/question/21142149/answer/52383396)
+
+
+
+## 目录
+
+### IoC
+
+
+### AOP
+
+
+### Bean
+
+
+### 配置
+- [ ] [常用注解](/docs/Spring/常用注解.md)
+    - `@SpringBootApplication`
+    - Bean 相关
+    - 配置相关
+
+### [校验](/docs/Spring/校验)
+- [ ] [Spring 中的校验](/docs/Spring/校验/Spring中的校验.md)

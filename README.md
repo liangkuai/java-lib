@@ -5,8 +5,8 @@
 
 - [并发](./concurrent/README.md)
 
-- [Java](/docs/Java/README.md)
+- [Java](/docs/Java)
 
 - [设计模式](/docs/design-pattern/README.md)
 
-- [Spring](./docs/spring)
+- [Spring](docs/Spring)

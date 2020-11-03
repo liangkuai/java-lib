@@ -26,11 +26,38 @@
 ### Bean
 
 
+
+### Spring Boot
+- [intro](/docs/Spring/SpringBoot/README.md)
+- [ ] [自动配置](/docs/Spring/SpringBoot/自动配置.md)
+- [x] [Starter](/docs/Spring/SpringBoot/Starter.md)
+
+
+### 校验
+- [ ] [intro](/docs/Spring/校验/README.md)
+- [ ] [Spring 中的校验](/docs/Spring/校验/Spring中的校验.md)
+
+
 ### 配置
-- [ ] [常用注解](/docs/Spring/常用注解.md)
+- [ ] Profile
+
+
+### 测试
+- [intro](/docs/Spring/测试/README.md)
+- [ ] Spring Boot Test
+- [ ] JUnit
+- [ ] Mock
+
+
+### 常用注解
+- [intro](/docs/Spring/常用注解.md)
     - `@SpringBootApplication`
     - Bean 相关
     - 配置相关
+- 配置相关
+    - [`@ConfigurationProperties`](/docs/Spring/常用注解/@ConfigurationProperties.md)
 
-### [校验](/docs/Spring/校验)
-- [ ] [Spring 中的校验](/docs/Spring/校验/Spring中的校验.md)
+
+### 其他
+- [RestTemplate](/docs/Spring/其他/RestTemplate.md)
+- [AbstractRoutingDataSource](/docs/Spring/其他/AbstractRoutingDataSource.md)

@@ -26,6 +26,9 @@
 
 
 ### Bean
+- [intro](/docs/Spring/Bean/README.md)
+- [ ] [`BeanDefinition`](/docs/Spring/Bean/BeanDefinition.md)
+- [ ] [`BeanPostProcessor`](/docs/Spring/Bean/BeanPostProcessor.md)
 - Bean 的生命周期
 - 循环依赖问题
     - [x] 1. 构造器注入产生的循环依赖
@@ -60,7 +63,7 @@
 
 
 ### 常用注解
-- [intro](/docs/Spring/常用注解.md)
+- [intro](/docs/Spring/常用注解/常用注解.md)
     - `@SpringBootApplication`
     - Bean 相关
     - 配置相关

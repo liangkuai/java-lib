@@ -18,13 +18,19 @@
 ## 目录
 
 ### IoC
+- [intro](/docs/Spring/IoC/README.md)
 
 
 ### AOP
+- [intro](/docs/Spring/AOP/README.md)
 
 
 ### Bean
-
+- Bean 的生命周期
+- 循环依赖问题
+    - [x] 1. 构造器注入产生的循环依赖
+    - [x] 2. setter 注入产生的循环依赖
+    - [x] 3. 作用域为 prototype 的 bean 之间的循环依赖
 
 
 ### Spring Boot
@@ -36,6 +42,10 @@
 ### 校验
 - [ ] [intro](/docs/Spring/校验/README.md)
 - [ ] [Spring 中的校验](/docs/Spring/校验/Spring中的校验.md)
+    - 嵌套校验
+    - 集合校验
+    - 分组校验
+    - 自定义校验
 
 
 ### 配置

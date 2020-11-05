@@ -26,7 +26,7 @@
         - [ ] [`java.lang.Object` 相关（wait / notify / notifyAll）](/docs/Java/并发/线程/线程间的协作/object.md)
 - 线程池
     - [intro](/docs/Java/并发/线程池)
-    - [ ] [ThreadPoolExecutor](/docs/Java/并发/线程池/ThreadPoolExecutor.md)
+    - [x] [ThreadPoolExecutor](/docs/Java/并发/线程池/ThreadPoolExecutor.md)
         - [x] [FixedThreadPool](/docs/Java/并发/线程池/FixedThreadPool.md)
         - [x] [SingleThreadExecutor](/docs/Java/并发/线程池/SingleThreadExecutor.md)
         - [x] [CachedThreadPool](/docs/Java/并发/线程池/CachedThreadPool.md)

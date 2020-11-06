@@ -66,3 +66,66 @@ public ThreadPoolExecutor(int corePoolSize,
 其中 `ThreadPoolExecutor.AbortPolicy` 是线程池默认的拒绝策略。
 
 - 自定义：实现 `RejectedExecutionHandler` 接口，在使用 `ThreadPoolExecutor` 创建线程池时，将实现类的对象作为参数传递。
+
+
+### 原理分析
+
+```java
+    // 存放线程池的运行状态（runState）和线程池内有效线程的数量（workerCount）
+    private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
+
+    private static int workerCountOf(int c) {
+        return c & CAPACITY;
+    }
+
+    // 任务队列
+    private final BlockingQueue<Runnable> workQueue;
+
+    public void execute(Runnable command) {
+        // 如果任务为 null，则抛出异常
+        if (command == null)
+            throw new NullPointerException();
+
+        // ctl 中保存的线程池当前的一些状态信息
+        int c = ctl.get();
+
+        // 1. 先判断当前线程池中运行的任务数量是否小于 corePoolSize
+        // 如果小于的话，通过 addWorker(command, true) 新建一个线程，并将任务（command）添加到该线程中；
+        // 然后，启动该线程从而执行任务。
+        if (workerCountOf(c) < corePoolSize) {
+            if (addWorker(command, true))
+                return;
+            c = ctl.get();
+        }
+        // 2. 如果当前运行的任务数量大于等于 corePoolSize
+        // 通过 isRunning() 方法判断线程池状态，线程池处于 RUNNING 状态并且队列可以加入任务，该任务才会被加入进去。
+        if (isRunning(c) && workQueue.offer(command)) {
+            int recheck = ctl.get();
+            // 再次获取线程池状态，如果线程池状态不是 RUNNING 状态就需要从任务队列中移除任务，并尝试判断线程是否全部执行完毕；
+            // 同时执行拒绝策略。
+            if (! isRunning(recheck) && remove(command))
+                reject(command);
+            else if (workerCountOf(recheck) == 0)   // 如果当前线程池为空就新创建一个线程并执行
+                addWorker(null, false);
+        }
+        // 3. 通过 addWorker(command, false) 新建一个线程，并将任务（command）添加到该线程中；然后，启动该线程从而执行任务。
+        // 如果 addWorker(command, false) 执行失败，则通过 reject() 执行相应的拒绝策略的内容。
+        else if (!addWorker(command, false))
+            reject(command);
+    }
+```
+
+
+### 对比
+
+#### `execute()` 和 `submit()`
+- `execute()` 方法用于提交不需要返回值的任务，所以无法判断任务是否被线程池执行成功与否；
+- `submit()` 方法用于提交需要返回值的任务。线程池会返回一个 `Future` 类型的对象，通过这个 `Future` 对象可以判断任务是否执行成功，并且可以通过 `Future` 的 `get()` 方法来获取返回值，`get()` 方法会阻塞当前线程直到任务完成，而使用 `get(long timeout，TimeUnit unit)`方法则会阻塞当前线程一段时间后立即返回，这时候有可能任务没有执行完。
+
+#### `shutdown()` 和 `shutdownNow()`
+- `shutdown()` ：关闭线程池，线程池的状态变为 `SHUTDOWN`。线程池不再接受新任务了，但是队列里的任务得执行完毕。
+- `shutdownNow()` ：关闭线程池，线程的状态变为 `STOP`。线程池会终止当前正在运行的任务，并停止处理排队的任务并返回正在等待执行的 List。
+
+#### `isTerminated()` 和 `isShutdown()`
+- `isShutDown()` ：当调用 `shutdown()` 方法后返回为 true。
+- `isTerminated()` ：当调用 `shutdown()` 方法后，并且所有提交的任务完成后返回为 true。

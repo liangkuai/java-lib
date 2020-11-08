@@ -3,7 +3,6 @@
 `FixedThreadPool` 被称为可重用固定线程数的线程池。
 
 #### 1. 创建方式
-
 工具类 `Executors` 中提供静态方法用来创建 `FixedThreadPool` 实例：
 
 ```java
@@ -28,18 +27,16 @@
 
 
 #### 2. 任务执行过程
-
 `FixedThreadPool` 的 `execute()` 方法运行示意图：
 
 ![FixedThreadPool](/assets/images/Java/thread-pool/FixedThreadPool.jpeg)
 
-1. 线程池内正在运行的线程数 < `corePoolSize`，如果再来新任务的话，就创建新的线程来执行任务。
-2. 线程池内正在运行的线程数 = `corePoolSize`，如果再来新任务的话，会将任务加入 `LinkedBlockingQueue`。
-3. 线程池内的线程执行完当前任务之后，会在循环中反复从 `LinkedBlockingQueue` 中获取任务来执行。
+1. 当线程池内正在运行的线程数 < `corePoolSize` 时，如果再来新任务，就创建新的线程来执行。
+2. 当线程池内正在运行的线程数 = `corePoolSize` 时，如果再来新任务，就把任务加入 `LinkedBlockingQueue`。
+3. 线程池内的线程执行完当前任务之后，会在循环中反复从 `LinkedBlockingQueue` 中取任务来执行。
 
 
 #### 3. 为什么不推荐使用 `FixedThreadPool` ？
-
 `FixedThreadPool` 使用无界队列 `LinkedBlockingQueue`（队列的容量为 `Intger.MAX_VALUE`）作为线程池的任务队列会对线程池带来如下影响 ：
 
 1. 当线程池内的线程数达到 `corePoolSize` 后，新任务将在无界队列中等待，因此线程池中的线程数不会超过 `corePoolSize`。

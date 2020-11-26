@@ -1,13 +1,13 @@
 # 线程间的协作 - `java.lang.Thread` 相关
-- sleep()
-- join()
-- yield()
+- sleep
+- join
+- yield
 
-### `sleep()`
+## sleep
 
 
 
-### `join()`
+## join
 
 **在当前线程中调用另一个线程的 join() 方法，会将当前线程被挂起，进入等待状态（Waiting），而不是忙等待，直到目标线程结束。**
 
@@ -63,7 +63,7 @@ public static void main(String[] args) {
 J.U.C 类库中的 `CyclicBarrier` 可能比最初的线程类库中的 `join()` 方法更加好用。
 
 
-### `yield()`
+## yield
 
 - 让出当前线程的 CPU 时间片（但不一定会让出，取决于线程调度器），重新进入就绪状态，竞争 CPU 的调度。
 - 不会释放持有的锁。

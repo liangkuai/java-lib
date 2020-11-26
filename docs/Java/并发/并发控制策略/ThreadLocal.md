@@ -30,10 +30,9 @@ JDK 通过弱引用来解决这个问题，entry 对 key 使用弱引用，当 `
 **为了解决这个问题，在线程执行完之后需要调用 `remove()` 方法**。除此之外，`ThreadLocalMap` 实现中已经考虑了这种情况，在调用 `set()`、`get()`、`remove()` 方法的时候，会清理掉 key 为 `null` 的记录。
 
 
-### `InheritableThreadLocal`
-**在异步场景下，子线程无法继承父线程中的 `ThreadLocal` 变量。**
+## `InheritableThreadLocal`
 
-为了解决这个问题，JDK 还提供了 `InheritableThreadLocal` 类。
+**在异步场景下，子线程无法继承父线程中的 `ThreadLocal` 变量**。为了解决这个问题，JDK 还提供了 `InheritableThreadLocal` 类。
 
 #### 实现原理
 子线程是在父线程中通过调用 `new Thread()` 方法来创建子线程，`Thread#init` 方法在 Thread 的构造方法中被调用。**在 `init()` 方法中拷贝父线程数据到子线程中**：
@@ -50,7 +49,6 @@ private void init(ThreadGroup g, Runnable target, String name,
     ...
 }
 ```
-
 
 #### 问题
 `InheritableThreadLocal` 仍然有缺陷，一般我们做异步化处理都是使用的线程池，而 `InheritableThreadLocal` 是在 `new Thread()` 中的 `init()` 方法赋值的，而线程池是线程复用的逻辑，所以这里会存在问题。

@@ -5,6 +5,8 @@
 ```
 -Xms        // 堆初始大小
 -Xmx        // 堆最大大小
+
+-XX:+HeapDumpOnOutOfMemoryError     // 堆发生 OOM 时 dump 当前内存转储快照
 ```
 
 #### 新生代
@@ -24,14 +26,12 @@
 
 
 #### 永久代
-
 ```
 -XX:PermSize        // 方法区 (永久代) 初始大小
 -XX:MaxPermSize     // 方法区 (永久代) 最大大小
 ```
 
 #### 元空间
-
 ```
 -XX:MetaspaceSize       // Metaspace 初始大小
 -XX:MaxMetaspaceSize    // Metaspace 最大大小
@@ -40,7 +40,6 @@
 
 ### GC 相关
 #### 垃圾回收器
-
 ```
 -XX:+UseSerialGC
 -XX:+USeParNewGC
@@ -50,7 +49,6 @@
 ```
 
 #### GC
-
 ```
 -verbose:gc                 // 输出 GC 详情
 -XX:+PrintGCDetails         // 打印 GC 详情日志

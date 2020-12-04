@@ -16,6 +16,13 @@
 ### [异常]()
 
 
+### 日志
+- [JDK Logging](/docs/Java/日志/JDK-Logging.md)
+- [Apache Commons Logging](/docs/Java/日志/Apache-Commons-Logging.md)
+- [Log4j](/docs/Java/日志/log4j.md)
+- [SLF4J 和 Logback](/docs/Java/日志/SLF4J和Logback.md)
+
+
 ### 并发
 - 线程
     - [x] [线程的状态](/docs/Java/JVM/并发/Java与线程/线程的状态.md)
@@ -143,7 +150,7 @@
                 - [ ] [ReentrantLock]()
             - 非阻塞同步（乐观并发控制）
             - 无同步方案
-- [x] [(synchronized) 锁优化](/docs/Java/JVM/并发/Java与线程/锁优化.md)
+- [x] [锁优化（`synchronized`）](/docs/Java/JVM/并发/Java与线程/锁优化.md)
     - 自旋锁与自适应
     - 轻量级锁
     - 偏向锁

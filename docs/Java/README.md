@@ -13,13 +13,16 @@
     - [x] 静态内部类
 
 
-### [异常]()
-
+### 异常
+- [intro](/docs/Java/异常/README.md)
+- [异常处理](/docs/Java/异常/异常处理.md)
+    - [ ] try-catch-finally
+    - [x] try-with-resources
 
 ### 日志
 - [JDK Logging](/docs/Java/日志/JDK-Logging.md)
 - [Apache Commons Logging](/docs/Java/日志/Apache-Commons-Logging.md)
-- [Log4j](/docs/Java/日志/log4j.md)
+- [Log4j](/docs/Java/日志/Log4j.md)
 - [SLF4J 和 Logback](/docs/Java/日志/SLF4J和Logback.md)
 
 

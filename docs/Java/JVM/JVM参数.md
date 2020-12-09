@@ -1,7 +1,7 @@
 # JVM 参数
 
 ### 内存相关
-#### 堆
+#### 1. 堆
 ```
 -Xms        // 堆初始大小
 -Xmx        // 堆最大大小
@@ -9,7 +9,7 @@
 -XX:+HeapDumpOnOutOfMemoryError     // 堆发生 OOM 时 dump 当前内存转储快照
 ```
 
-#### 新生代
+#### 2. 新生代
 ```
 -Xmn                // 新生代大小
 -XX:NewSize         // 新生代初始大小
@@ -24,20 +24,20 @@
 -XX:Survivor=8      // 设置 Eden 区和 Survivor 区的比例，默认 8
 ```
 
-
-#### 永久代
+#### 3. 永久代
 ```
 -XX:PermSize        // 方法区 (永久代) 初始大小
 -XX:MaxPermSize     // 方法区 (永久代) 最大大小
 ```
 
-#### 元空间
+#### 4. 元空间
 ```
 -XX:MetaspaceSize       // Metaspace 初始大小
 -XX:MaxMetaspaceSize    // Metaspace 最大大小
 ```
 
 
+---
 ### GC 相关
 #### 垃圾回收器
 ```

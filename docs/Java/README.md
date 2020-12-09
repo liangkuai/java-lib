@@ -145,8 +145,8 @@
     - [ ] [内存间的交互操作](/docs/Java/JVM/并发/Java内存模型/内存间的交互操作.md)
     - [ ] [volatile]()
         - 内存屏障
-    - [ ] [JMM 三大特性]()
-    - [ ] [先行发生原则]()
+    - [ ] [JMM 三大特性](/docs/Java/JVM/并发/Java内存模型/JMM三大特性.md)
+    - [ ] [先行发生原则](/docs/Java/JVM/并发/Java内存模型/先行发生原则.md)
 - [x] [Java 与线程](/docs/Java/JVM/并发/Java与线程/README.md)
     - [x] [线程的状态](/docs/Java/JVM/并发/Java与线程/线程的状态.md)
     - [x] [线程安全](/docs/Java/JVM/并发/Java与线程/线程安全.md)

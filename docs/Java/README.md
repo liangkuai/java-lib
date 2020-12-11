@@ -7,11 +7,9 @@
 - [x] [`==` 和 `equals()`](/docs/Java/基础/==和equals().md)
 - [x] [Comparable / Comparator](/docs/Java/基础/Comparable_Comparator.md)
 
-
 ### 类
 - [x] [内部类](/docs/Java/类/内部类.md)
     - [x] 静态内部类
-
 
 ### 异常
 - [intro](/docs/Java/异常/README.md)
@@ -19,12 +17,11 @@
     - [ ] try-catch-finally
     - [x] try-with-resources
 
-### 日志
-- [JDK Logging](/docs/Java/日志/JDK-Logging.md)
-- [Apache Commons Logging](/docs/Java/日志/Apache-Commons-Logging.md)
-- [Log4j](/docs/Java/日志/Log4j.md)
-- [SLF4J 和 Logback](/docs/Java/日志/SLF4J和Logback.md)
-
+### 动态代理
+> 参考代码：[org.lock.java-lib-example.proxy](/java-lib-example/src/main/java/proxy)
+- [x] [1. 静态代理](/docs/Java/动态代理/1.静态代理.md)
+- [x] [2. JDK 动态代理](/docs/Java/动态代理/2.JDK动态代理.md)
+- [ ] [3. cglib 动态代理](/docs/Java/动态代理/3.cglib动态代理.md)
 
 ### 并发
 - 线程
@@ -54,7 +51,7 @@
 - J.U.C
     - [x] [Atomic 原子类](/docs/Java/并发/JUC/Atomic原子类.md)
     - [ ] [LockSupport](/docs/Java/并发/JUC/LockSupport.md)
-    - [ ] [AQS](/docs/Java/并发/JUC/AQS/AQS.md)
+    - [ ] [***AQS***](/docs/Java/并发/JUC/AQS/AQS.md)
         - [ ] [Condition](/docs/Java/并发/JUC/AQS/Condition.md)
         - [ ] [Semaphore](/docs/Java/并发/JUC/AQS/Semaphore.md)
         - [ ] [CountDownLatch](/docs/Java/并发/JUC/AQS/CountDownLatch.md)
@@ -63,6 +60,11 @@
 ### SPI
 - [intro](/docs/Java/SPI/README.md)
 
+### 日志
+- [JDK Logging](/docs/Java/日志/JDK-Logging.md)
+- [Apache Commons Logging](/docs/Java/日志/Apache-Commons-Logging.md)
+- [Log4j](/docs/Java/日志/Log4j.md)
+- [SLF4J 和 Logback](/docs/Java/日志/SLF4J和Logback.md)
 
 
 ## JVM

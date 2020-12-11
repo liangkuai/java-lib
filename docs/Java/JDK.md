@@ -7,8 +7,6 @@ JDK = JRE + JVM + ...
 - JVM（Java Virtual Machine，Java 虚拟机）
 
 
-
-
 ## Java 环境变量
 
 从 Oracle 官方下载的 JDK 中包含了 JRE。进行 Java 开发则需要配置 Java  开发环境。

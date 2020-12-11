@@ -14,16 +14,16 @@ import java.lang.reflect.Method;
 public class ProxyInvocationHandler implements InvocationHandler {
 
     // 被代理对象
-    private Subject subject;
+    private Object targetObj;
 
-    public ProxyInvocationHandler(Subject subject) {
-        this.subject = subject;
+    public ProxyInvocationHandler(Object targetObj) {
+        this.targetObj = targetObj;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("前置代理逻辑");
-        Object result = method.invoke(subject, args);
+        Object result = method.invoke(targetObj, args);
         System.out.println("后置代理逻辑");
         return result;
     }

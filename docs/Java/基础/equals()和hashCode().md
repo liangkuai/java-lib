@@ -30,8 +30,8 @@
 ### 2. hashCode() 和 equals()
 面试经常问：你重写过 `hashCode()` 和 `equals()` 吗？，为什么重写 `equals()` 时必须重写 `hashCode()` 方法？
 
-参考 HashMap 添加键值对时 `hashCode()` 的作用，可以得出，
+参考 `HashMap` 添加键值对时 `hashCode()` 的作用，可以得出，
 - 如果两个对象，`equals()` 判断相同，`hashCode()` 也一定相同。
 - 如果两个对象，`hashCode()` 相同，`equals`() 判断不一定相同。
 
-如果只重写 `equals()` 没有重写 `hashCode()`，就会出现这种情况：`equals()` 判断相同的两个 key hashCode 不同，两个键值对就会添加到不同的哈希桶中，导致 HashMap 中存在重复 key。
+如果只重写 `equals()` 没有重写 `hashCode()`，就会出现这种情况：`equals()` 判断相同的两个 key hashCode 不同，两个键值对就会添加到不同的哈希桶中，导致 `HashMap` 中存在重复 key。

@@ -4,7 +4,8 @@
 
 ### 基础
 - [x] [数据类型](/docs/Java/基础/数据类型.md)
-- [x] [equals() 和 hashCode()](/docs/Java/基础/equals()和hashCode().md)
+- [Object 类](/docs/Java/基础/Object.md)
+    - [x] [equals() 和 hashCode()](/docs/Java/基础/equals()和hashCode().md)
 - [x] [Comparable / Comparator](/docs/Java/基础/Comparable_Comparator.md)
 
 ### 类

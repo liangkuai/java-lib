@@ -3,10 +3,10 @@
 ### [JDK](/docs/Java/JDK.md)
 
 ### 基础
-- [x] [数据类型](/docs/Java/基础/数据类型.md)
+- [数据类型](/docs/Java/基础/数据类型.md)
 - [Object 类](/docs/Java/基础/Object.md)
-    - [x] [equals() 和 hashCode()](/docs/Java/基础/equals()和hashCode().md)
-- [x] [Comparable / Comparator](/docs/Java/基础/Comparable_Comparator.md)
+    - [equals() 和 hashCode()](/docs/Java/基础/equals()和hashCode().md)
+- [Comparable / Comparator](/docs/Java/基础/Comparable_Comparator.md)
 
 ### 类
 - [x] [内部类](/docs/Java/类/内部类.md)
@@ -117,13 +117,14 @@
 - [ ] [7. 直接内存](/docs/Java/JVM/JVM运行时数据区域/直接内存.md)
     - 元空间
 
-### [5. HotSpot VM - 堆中的对象](/docs/Java/JVM/HotSpot中的对象.md)
-- [x] 对象的创建过程
-- [x] 对象在内存中存储的内容
-    - 类型指针
-    - 对象自身的运行时数据（Mark Word）
-    - 数组长度
-- [x] 对象的访问定位
+### 5. 堆中的对象
+- [HotSpot VM - 堆中的对象](/docs/Java/JVM/堆中的对象/HotSpot中的对象.md)
+    - [x] 对象的创建过程
+    - [x] 对象在内存中存储的内容
+        - 类型指针
+        - 对象自身的运行时数据（Mark Word）
+        - 数组长度
+    - [x] 对象的访问定位
 
 ### 6. JVM 垃圾回收
 - [intro](/docs/Java/JVM/JVM垃圾回收/README.md)
@@ -136,19 +137,27 @@
     - 标记-清除
     - 标记-复制
     - 标记-整理
-- [ ] [垃圾回收器](/docs/Java/JVM/JVM垃圾回收/垃圾回收器.md)
+- [x] [垃圾回收器](/docs/Java/JVM/JVM垃圾回收/垃圾回收器.md)
 - [x] [内存分配和回收策略](/docs/Java/JVM/JVM垃圾回收/内存分配和回收策略.md)
-- [ ] [GC 策略](/docs/Java/JVM/JVM垃圾回收/GC策略.md)
-- [ ] OOM
+    - GC 类型
+    - 内存分配
+    - GC 策略
 
-### 7. 字节码执行引擎
+### 7. JVM 监控、问题排查、调优
+- [JVM 工具](/docs/Java/JVM/JVM监控、问题排查、调优/JVM工具.md)
+- [JVM 参数](/docs/Java/JVM/JVM监控、问题排查、调优/JVM参数.md)
+- [ ] [GC 相关问题](/docs/Java/JVM/JVM监控、问题排查、调优/GC相关问题.md)
+- [ ] [OOM](/docs/Java/JVM/JVM监控、问题排查、调优/OOM.md)
+- [ ] [CPU 100%](/docs/Java/JVM/JVM监控、问题排查、调优/CPU100%.md)
+
+### 8. 字节码执行引擎
 - [ ] 运行时栈帧
     - [ ] 局部变量表
     - [ ] 操作数栈
     - [ ] 动态链接
     - [ ] 方法返回地址
 
-### 8. 并发
+### 9. 并发
 - [x] [Java 内存模型](/docs/Java/JVM/并发/Java内存模型/README.md)
     - [ ] [内存间的交互操作](/docs/Java/JVM/并发/Java内存模型/内存间的交互操作.md)
     - [ ] [volatile]()
@@ -172,17 +181,3 @@
     - 锁消除
     - 锁粗化
 - [ ] 死锁
-
-### [JVM 参数](/docs/Java/JVM/JVM参数.md)
-- 内存相关
-    - 堆
-    - 新生代
-    - 永久代
-    - 元空间
-- GC 相关
-- 并发
-    - 锁
-
-### [FAQ](/docs/Java/JVM/FAQ.md)
-- 如何解决 OOM？
-- 如何排查 CPU 100%？

@@ -39,7 +39,7 @@
 
 ---
 ### GC 相关
-#### 垃圾回收器
+#### 1. 垃圾回收器
 ```
 -XX:+UseSerialGC
 -XX:+USeParNewGC
@@ -48,7 +48,7 @@
 -XX:+UseG1GC
 ```
 
-#### GC
+#### 2. GC
 ```
 -verbose:gc                 // 输出 GC 详情
 -XX:+PrintGCDetails         // 打印 GC 详情日志
@@ -56,8 +56,9 @@
 ```
 
 
+---
 ### 并发相关
-#### 锁
+#### 1. 锁
 ```
 -XX:+UseSpinning            // 开启自旋锁
 -XX:PreBlockSpin=10         // 自适应自旋次数

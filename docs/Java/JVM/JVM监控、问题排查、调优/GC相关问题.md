@@ -37,3 +37,9 @@
 #### 3. 分析 heapdump 文件
 - 使用 MAT 工具导入 dump 文件；
 - 通过 Dominator Tree 查看当前堆中，占用内存大的类和对象，再结合代码分析。
+
+
+
+
+### 参考
+- [排查YGC问题 - IT人的职场进阶 - 微信公众号](https://mp.weixin.qq.com/s/O0l-d928hr994OpSNw3oow)

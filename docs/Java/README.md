@@ -148,7 +148,6 @@
 - [JVM 参数](/docs/Java/JVM/JVM监控、问题排查、调优/JVM参数.md)
 - [ ] [GC 相关问题](/docs/Java/JVM/JVM监控、问题排查、调优/GC相关问题.md)
 - [ ] [OOM](/docs/Java/JVM/JVM监控、问题排查、调优/OOM.md)
-- [ ] [CPU 100%](/docs/Java/JVM/JVM监控、问题排查、调优/CPU100%.md)
 
 ### 8. 字节码执行引擎
 - [ ] 运行时栈帧

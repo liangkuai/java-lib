@@ -1,10 +1,13 @@
 # JDK
 
-JDK = JRE + JVM + ...
+JDK = JRE + Java 工具 + ...
 
 - JDK（Java Development Kit，Java 开发套件）
 - JRE（Java Runtime Environment，Java 运行环境）
-- JVM（Java Virtual Machine，Java 虚拟机）
+    - JVM（Java Virtual Machine，Java 虚拟机）
+    - Java 类库
+- Java 工具
+    - javac
 
 
 ## Java 环境变量

@@ -1,22 +1,31 @@
 # Java
 
-### [JDK](/docs/Java/JDK.md)
+### 0. intro
+- [Java](/docs/Java/Java.md)
+- [JDK](/docs/Java/intro/JDK.md)
 
-### 基础
+### 1. 基础
 - [数据类型](/docs/Java/基础/数据类型.md)
 - [Object 类](/docs/Java/基础/Object.md)
     - [equals() 和 hashCode()](/docs/Java/基础/equals()和hashCode().md)
 - [Comparable / Comparator](/docs/Java/基础/Comparable_Comparator.md)
 
-### 类
-- [x] [内部类](/docs/Java/类/内部类.md)
+### 2. 类与接口
+- [x] [内部类](/docs/Java/类与接口/内部类.md)
     - [x] 静态内部类
+
+### 3. OOP
+- 封装
+- [继承](/docs/Java/OOP/继承.md)
+- 多态
 
 ### 异常
 - [intro](/docs/Java/异常/README.md)
 - [异常处理](/docs/Java/异常/异常处理.md)
     - [ ] try-catch-finally
     - [x] try-with-resources
+
+### 泛型
 
 ### 动态代理
 > 参考代码：[org.lock.java-lib-example.proxy](/java-lib-example/src/main/java/proxy)
@@ -77,6 +86,7 @@
     - 字节码生成
 - 后端
     - 解释器
+        - [ ] [JIT](/docs/Java/JVM/编译及优化/JIT.md)
     - 编译器
     - 编译优化技术
         - [x] [逃逸分析](/docs/Java/JVM/编译及优化/逃逸分析.md)
@@ -116,6 +126,7 @@
 - [x] [6. 运行时常量池](/docs/Java/JVM/JVM运行时数据区域/运行时常量池.md)
 - [ ] [7. 直接内存](/docs/Java/JVM/JVM运行时数据区域/直接内存.md)
     - 元空间
+- [ ] [8. 字符串常量池](/docs/Java/JVM/JVM运行时数据区域/字符串常量池.md)
 
 ### 5. 堆中的对象
 - [HotSpot VM - 堆中的对象](/docs/Java/JVM/堆中的对象/HotSpot中的对象.md)
@@ -168,7 +179,7 @@
     - [x] [线程安全](/docs/Java/JVM/并发/Java与线程/线程安全.md)
         - 线程安全的实现方式
             - 互斥同步（悲观并发控制）
-                - [ ] [`synchronized` 关键字](/docs/Java/JVM/并发/Java与线程/synchronized.md)
+                - [x] [`synchronized` 关键字](/docs/Java/JVM/并发/Java与线程/synchronized.md)
                     - Monitor
                 - [ ] [ReentrantLock]()
             - 非阻塞同步（乐观并发控制）

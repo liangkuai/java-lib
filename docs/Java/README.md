@@ -1,13 +1,14 @@
 # Java
 
 ### 0. intro
-- [Java](/docs/Java/Java.md)
+- [Java](/docs/Java/intro/Java.md)
 - [JDK](/docs/Java/intro/JDK.md)
 
 ### 1. 基础
 - [数据类型](/docs/Java/基础/数据类型.md)
 - [Object 类](/docs/Java/基础/Object.md)
     - [equals() 和 hashCode()](/docs/Java/基础/equals()和hashCode().md)
+- [String / StringBuffer / StringBuilder](/docs/Java/基础/String_StringBuffer_StringBuilder.md)
 - [Comparable / Comparator](/docs/Java/基础/Comparable_Comparator.md)
 
 ### 2. 类与接口
@@ -26,6 +27,9 @@
     - [x] try-with-resources
 
 ### 泛型
+
+
+### IO
 
 ### 动态代理
 > 参考代码：[org.lock.java-lib-example.proxy](/java-lib-example/src/main/java/proxy)

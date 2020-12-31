@@ -24,7 +24,7 @@
 
 ### 查找
 
-1. [二分查找](./src/main/java/search/binary/README.md)
+1. [二分查找](../algorithm/src/main/java/search/README.md)
 
 2. 二叉查找树
 

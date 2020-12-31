@@ -31,9 +31,9 @@
 - [ ] [`BeanPostProcessor`](/docs/Spring/Bean/BeanPostProcessor.md)
 - Bean 的生命周期
 - 循环依赖问题
-    - [x] 1. 构造器注入产生的循环依赖
-    - [x] 2. setter 注入产生的循环依赖
-    - [x] 3. 作用域为 prototype 的 bean 之间的循环依赖
+    - [x] [1. 构造器注入产生的循环依赖](/docs/Spring/Bean/循环依赖问题/1.构造器注入产生的循环依赖.md)
+    - [x] [2. setter 注入产生的循环依赖](/docs/Spring/Bean/循环依赖问题/2.setter注入产生的循环依赖.md)
+    - [x] [3. 作用域为 prototype 的 bean 之间的循环依赖](/docs/Spring/Bean/循环依赖问题/3.作用域为prototype的bean之间的循环依赖.md)
 
 
 ### Spring Boot

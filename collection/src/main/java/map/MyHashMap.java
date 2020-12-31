@@ -72,10 +72,12 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
 
     private class Node<K, V> implements MyMap.MyEntry<K, V> {
 
+        private int hash;
         private K key;
         private V value;
 
-        public Node(K key, V value) {
+        public Node(int hash, K key, V value) {
+            this.hash = hash;
             this.key = key;
             this.value = value;
         }
@@ -174,11 +176,57 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     }
 
 
+    /**
+     *
+     * @param hash key 的 hash code
+     * @param key
+     * @param value
+     * @return 之前的 value
+     */
     private V putVal(int hash, K key, V value) {
 
+        Node<K, V>[] tab = table;
+        int len = tab.length;
+
+        // 如果 table 未初始化，或者长度为 0，进行扩容
+        if (tab == null || len == 0) {
+            tab = resize();
+            len = tab.length;
+        }
+
+        // 根据 hash code 计算 key 在哈希数组中的索引位置
+        int index = hash & (len - 1);
+
+        Node<K, V> bucket = tab[index];
+        if (bucket == null) {
+            // 如果索引位置为 index 的哈希桶为 null，直接放入新结点
+            table[index] = new Node<>(hash, key, value);
+        } else {
+            // 哈希桶已经存在元素
+
+            Node<K, V> targetNode;
+
+            // 如果 hash code 相同并且 key 和哈希桶第一个元素的 key 相同，
+            // 确定这个已存在的元素就是我们准备插入的元素
+            if (bucket.hash == hash && (bucket.key == key || (key != null && key.equals(bucket.key)))) {
+                targetNode = bucket;
+            }
+        }
+
+        return null;
     }
 
 
+    /**
+     * 扩容
+     * @return 扩容后的 table
+     */
+    private Node<K, V>[] resize() {
+
+
+
+
+    }
 
 
 //    private final V putVal(int hash, K key, V value) {

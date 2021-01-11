@@ -9,14 +9,14 @@ package sort.swap;
 public class BubbleSort {
 
     public static int[] sort(int[] nums) {
-        int len = nums.length, tmp;
+        int len = nums.length;
 
         // nums.length - 1 次内循环
         for (int i = 1; i <= len - 1; i++) {
             // 冒泡
             for (int j = 0; j < len - i; j++) {
                 if (nums[j] > nums[j + 1]) {
-                    tmp = nums[j + 1];
+                    int tmp = nums[j + 1];
                     nums[j + 1] = nums[j];
                     nums[j] = tmp;
                 }
@@ -29,7 +29,7 @@ public class BubbleSort {
      * 优化：交互标识
      */
     public static int[] sort2(int[] nums) {
-        int len = nums.length, tmp;
+        int len = nums.length;
 
         // nums.length - 1 次内循环
         for (int i = 1; i <= len - 1; i++) {
@@ -38,7 +38,7 @@ public class BubbleSort {
             // 冒泡
             for (int j = 0; j < len - i; j++) {
                 if (nums[j] > nums[j + 1]) {
-                    tmp = nums[j + 1];
+                    int tmp = nums[j + 1];
                     nums[j + 1] = nums[j];
                     nums[j] = tmp;
 

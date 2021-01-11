@@ -11,7 +11,6 @@ public class BubbleSortTest {
 
     @Test
     public void sortTest() {
-
         Random r = new Random();
         int[] a = IntStream.generate(() -> r.nextInt(10000000))
                 .limit(10000)
@@ -31,7 +30,6 @@ public class BubbleSortTest {
 
     @Test
     public void sort2Test() {
-
         Random r = new Random();
         int[] a = IntStream.generate(() -> r.nextInt(10000000))
                 .limit(10000)
